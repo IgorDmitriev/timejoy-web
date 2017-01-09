@@ -70,14 +70,10 @@ the API, components works well and styled, events with location display on googl
 
 **Objective:** CRUD + Tags for favorite places. Users can toggle to display favorite places on map or not. Users can add favorite place to route.
 
-### Phase 6: Smart Favorite Places (8h)
-
-**objective:** Users can search for Gaz station, Lunch, Coffeeshop or other places near their event location or on the way. Uses one or several external API (Google Places, TripAdvisor, Yelp, Foursquare).
-
-
 
 ### Bonus Features (TBD)
 
+- [ ] Smart Favorite Places: Users can search for Gaz station, Lunch, Coffeeshop or other places near their event location or on the way. Uses one or several external API (Google Places, TripAdvisor, Yelp, Foursquare).
 - [ ] Parking Options: Users can request search for parking around event location and see real-time options. They can choose them and add to the route. Uses ParkWhiz API.
 - [ ] Sign in with Google
 - [ ] Sync Calendar Events with Google Calendar
