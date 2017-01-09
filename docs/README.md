@@ -25,12 +25,12 @@ sufficient CSS styling:
 - [ ] Build route for a day between calendar events with location, display directions on map
 - [ ] Favorite Places CRUD, categories, display on map, add to route
 - [ ] Search for Places like (gaz station, lunch, dinner, coffeshop) through API: Google Places, TripAdvisor, Yelp, Foursquare: add to favorites, display on map, add to route.
-- [ ] Parking Options around meeting location: search through API, save, display on map, add to route
 - [ ] Production README
 
 Bonus:
 - [ ] Sign in with Google
 - [ ] Sync Calendar Events with Google Calendar
+- [ ] Parking Options around meeting location: search through API, save, display on map, add to route
 - [ ] Add Uber API as a travel mode to calculate travel time / cost
 - [ ] Quantified self statistics (miles, total commute time, most popular location / area, most popular meeting partners)
 
@@ -58,27 +58,27 @@ Bonus:
 **Objective:** Calendar Events can be created, read, edited and destroyed through
 the API, components works well and styled, events with location display on google maps.
 
-### Phase 2.5: Managing User Profile and Settings (4h)
+### Phase 3: Managing User Profile and Settings (4h)
 
 **Objective:** Users can edit their profile information and settings
 
-### Phase 3: Build a route for a day between calendar events with location (8h)
+### Phase 4: Build a route for a day between calendar events with location (16h)
 
 **Objective:** Calculate travel time between events with location, change travel mode, recalculate if something changed in logistic., display directions on Google Maps.
 
-### Phase 4: Favorite Places (16h)
+### Phase 5: Favorite Places (16h)
 
 **Objective:** CRUD + Tags for favorite places. Users can toggle to display favorite places on map or not. Users can add favorite place to route.
 
-### Phase 5: Smart Favorite Places (8h)
+### Phase 6: Smart Favorite Places (8h)
 
 **objective:** Users can search for Gaz station, Lunch, Coffeeshop or other places near their event location or on the way. Uses one or several external API (Google Places, TripAdvisor, Yelp, Foursquare).
 
-### Phase 6: Parking Options (8h)
 
-**objective:** Users can request search for parking around event location and see real-time options. They can choose them and add to the route. Uses ParkWhiz API.
 
 ### Bonus Features (TBD)
+
+- [ ] Parking Options: Users can request search for parking around event location and see real-time options. They can choose them and add to the route. Uses ParkWhiz API.
 - [ ] Sign in with Google
 - [ ] Sync Calendar Events with Google Calendar
 - [ ] Add Uber API as a travel mode to calculate travel time / cost
