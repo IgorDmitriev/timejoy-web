@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
+import moment from 'moment-timezone';
+
+// Components
 import TimeJoyLogo from './timejoy_logo';
 import Tagline from './tagline';
 
@@ -8,7 +11,8 @@ class AuthForm extends React.Component {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      timezone: moment.tz.guess()
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
