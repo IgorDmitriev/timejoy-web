@@ -12,6 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+.keep
 
 # Ignore Byebug command history file.
 .byebug_history
@@ -21,3 +22,7 @@ bundle.js
 bundle.js.map
 .DS_Store
 npm-debug.log
+
+
+database.yml
+secrets.yml

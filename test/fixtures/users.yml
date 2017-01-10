@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  timezone: MyString
+  password_digest: MyString
+  session_token: MyString
+  image_url: MyString
+  default_travel_mode: MyString
+  home_address: MyString
+  home_lat: 1.5
+  home_lng: 1.5
+
+two:
+  email: MyString
+  timezone: MyString
+  password_digest: MyString
+  session_token: MyString
+  image_url: MyString
+  default_travel_mode: MyString
+  home_address: MyString
+  home_lat: 1.5
+  home_lng: 1.5
