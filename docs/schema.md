@@ -19,8 +19,6 @@ home_lng | float |
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key, unique
-previous_event_id          | integer   | not null, foreign key, indexed
-next_event_id          | integer   | not null, foreign key, indexed
 title       | string    | not null
 notes       | text      |
 start_date  | datetime  | not null, indexed
@@ -30,8 +28,7 @@ lat         | float     | indexed
 lng         | float     | indexed
 directions_id   | integer   | not null, foreign key, indexed
 selected_parking_id   | integer   | not null, foreign key, indexed
-source_type | string | polymorphic
-source_id | string | polymorphic
+type | string | not null ['calendar', 'place']
 
 
 ## event_participants
