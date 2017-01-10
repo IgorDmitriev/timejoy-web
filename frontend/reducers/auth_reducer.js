@@ -10,7 +10,7 @@
     errors: []
   };
 
-  const SessionReducer = (state = _nullUser, action) => {
+  const AuthReducer = (state = _nullUser, action) => {
     deepFreeze(state);
     switch (action.type) {
       case RECEIVE_CURRENT_USER:
@@ -36,4 +36,4 @@
     }
   };
 
-  export default SessionReducer;
+  export default AuthReducer;
