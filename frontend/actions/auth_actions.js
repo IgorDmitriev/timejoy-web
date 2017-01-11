@@ -4,10 +4,6 @@ import * as AuthAPIUtil from '../util/api_auth';
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const RECEIVE_LOGOUT_SUCCESS = 'RECEIVE_LOGOUT_SUCCESS';
 export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
-export const LOGIN = 'LOGIN';
-export const LOGOUT = 'LOGOUT';
-export const SIGNUP = 'SIGNUP';
-
 
 //regular actions
 
