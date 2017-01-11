@@ -22,7 +22,7 @@ class NavBar extends React.Component {
   render () {
     let email = this.props.currentUser ? this.props.currentUser.email : null;
     return (
-      <div>
+      <div className="navbar">
         Email: {email}
         <button onClick={this.logout}>Log Out</button>
       </div>

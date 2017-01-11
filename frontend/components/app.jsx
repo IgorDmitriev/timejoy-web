@@ -1,16 +1,14 @@
 import React from 'react';
-import NavBar from './nav_bar/nav_bar_container';
+import Calendar from './calendar/calendar';
+import Map from './map/map.jsx';
 
 
 const App = ({ children }) => (
-  <div>
-    <h1>TimeJoy</h1>
-    <NavBar />
-    { children }
-
-    // calendar component
-      // children
-    // map component
+  <div className="app">
+    <Calendar>
+      { children }
+    </Calendar>
+    <Map />
   </div>
 );
 
