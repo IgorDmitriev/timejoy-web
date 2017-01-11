@@ -34,7 +34,10 @@ const Root = ({ store }) => {
 
         <Route path="/" component={ App }
           onEnter={ _ensureLoggedIn }>
-
+          // /favorites
+            // /indexroute
+            // /gaz
+          // /newevent
 
         </Route>
       </Router>

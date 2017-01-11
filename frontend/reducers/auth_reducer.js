@@ -14,9 +14,7 @@
     deepFreeze(state);
     switch (action.type) {
       case RECEIVE_CURRENT_USER:
-        return merge(
-          {},
-          state,
+        return (
           {
             currentUser: action.currentUser,
             errors: []
@@ -24,10 +22,9 @@
         );
 
       case RECEIVE_ERRORS:
-        return merge(
-          {},
-          state,
+        return (
           {
+            currentUser: null,
             errors: action.errors
           }
         );

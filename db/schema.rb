@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110180333) do
+ActiveRecord::Schema.define(version: 20170111165930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title",             null: false
+    t.text     "notes"
+    t.datetime "start_date",        null: false
+    t.datetime "end_date",          null: false
+    t.string   "address"
+    t.float    "lat"
+    t.float    "lng"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "formatted_address"
+    t.index ["address"], name: "index_events_on_address", using: :btree
+    t.index ["end_date"], name: "index_events_on_end_date", using: :btree
+    t.index ["lat"], name: "index_events_on_lat", using: :btree
+    t.index ["lng"], name: "index_events_on_lng", using: :btree
+    t.index ["start_date"], name: "index_events_on_start_date", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email"

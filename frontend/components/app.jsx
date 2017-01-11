@@ -7,6 +7,10 @@ const App = ({ children }) => (
     <h1>TimeJoy</h1>
     <NavBar />
     { children }
+
+    // calendar component
+      // children
+    // map component
   </div>
 );
 
