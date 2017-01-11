@@ -54,6 +54,7 @@ class AuthForm extends React.Component {
   renderErrors () {
     return (
       <div className="auth-errors">
+        <span className="auth-errors-label">Oops, something goes wrong:</span>
         <ul>
           {
             this.props.errors.map((error, i) => (
@@ -73,31 +74,57 @@ class AuthForm extends React.Component {
   render () {
     return (
       <section className="auth-container">
-        <div>
-          <form className="auth-form">
+        <div className="auth-form">
+          <form>
             <TimeJoyLogo />
             { this.taglineOrErrors() }
-            <label className='auth-email-input'>Email
+
+            <div className="auth-input">
+              <span>Email</span>
               <input
                 type="text"
                 value={this.state.email}
                 onChange={this.handleInput('email')} />
-            </label>
-            <label className='auth-password-input'>Password
+            </div>
+
+            <div className="auth-input">
+              <span>Password</span>
               <input
                 type="password"
                 value={this.state.password}
                 onChange={this.handleInput('password')} />
-            </label>
-            <button
-              className="auth-button"
-              onClick={this.handleSubmit('signup')}>Sign Up</button>
-            <button
-              className="auth-button"
-              onClick={this.handleSubmit('login')}>Log In</button>
-            <button
-              className="auth-demo-button"
-              onClick={this.handleSubmit('demo')}>Demo account</button>
+            </div>
+
+
+            <div className="auth-buttons">
+              <div>
+                <span>Very excited to give it a try.</span>
+                <button
+                  onClick={this.handleSubmit('signup')}>Sign Up</button>
+              </div>
+              <div>
+                <span>I probably already have an account here..</span>
+                <button
+                  onClick={this.handleSubmit('login')}>Log In</button>
+              </div>
+            </div>
+
+            <div className="auth-demo-option">
+              <div className="auth-or">
+                <span>- or -</span>
+              </div>
+              <div className="auth-demo-description">
+                <span>
+                  I dont want to create and account, but still
+                  interested to see TimeJoy in action.
+                </span>
+              </div>
+              <div className="auth-demo-logo"></div>
+              <div className="auth-demo-button-label">Dive in with</div>
+              <button className="auth-demo-button"
+                onClick={this.handleSubmit('demo')}>Demo account
+              </button>
+            </div>
           </form>
         </div>
       </section>

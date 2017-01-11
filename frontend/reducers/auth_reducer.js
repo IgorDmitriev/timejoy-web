@@ -18,7 +18,8 @@
           {},
           state,
           {
-            currentUser: action.currentUser
+            currentUser: action.currentUser,
+            errors: []
           }
         );
 

@@ -11,7 +11,7 @@
  article, aside, canvas, details, embed,
  figure, figcaption, footer, header, hgroup,
  menu, nav, output, ruby, section, summary,
- time, mark, audio, video {
+ time, mark, audio, video, main {
    margin: 0;
    padding: 0;
    border: 0;
@@ -19,6 +19,10 @@
    font: inherit;
    vertical-align: baseline;
    box-sizing: border-box;
+   font-weight: normal;
+   font-style: normal;
+   font-stretch: normal;
+   letter-spacing: 0.8px;
  }
  /* HTML5 display-role reset for older browsers */
  article, aside, details, figcaption, figure,
