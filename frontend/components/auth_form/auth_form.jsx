@@ -14,6 +14,7 @@ class AuthForm extends React.Component {
       password: "",
       timezone: moment.tz.guess()
     };
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
     this.taglineOrErrors = this.taglineOrErrors.bind(this);
@@ -45,6 +46,12 @@ class AuthForm extends React.Component {
           return this.props.requestSignup(user);
         case 'login':
           return this.props.requestLogin(user);
+        case 'demo':
+          const demo = {
+            email: 'demo@timejoy.co',
+            password: 'demoaccount'
+          };
+          return this.props.requestLogin(demo);
         default:
           return;
       }
