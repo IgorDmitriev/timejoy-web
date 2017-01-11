@@ -9,7 +9,11 @@ class Event < ApplicationRecord
   end
 
 
-  after_initialize :update_address
+  after_initialize :ensure_updated_address
+
+  def ensure_updated_address
+    update_address unless formatted_address
+  end
 
   def update_address
     return unless address
