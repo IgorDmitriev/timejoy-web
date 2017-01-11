@@ -122,7 +122,7 @@ class AuthForm extends React.Component {
               </div>
               <div className="auth-demo-description">
                 <span>
-                  I dont want to create and account, but still
+                  I dont want to create an account, but still
                   interested to see TimeJoy in action.
                 </span>
               </div>
