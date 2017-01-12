@@ -2,7 +2,10 @@ import {
   RECEIVE_EVENTS,
   RECEIVE_EVENT,
   REMOVE_EVENT
-} from '../actions/event_actions.js';
+} from '../actions/event_actions';
+import {
+  LOG_OUT
+} from '../actions/auth_actions';
 import deepFreeze from 'deep-freeze';
 import merge from 'lodash/merge';
 
@@ -19,6 +22,9 @@ const EventReducer = (state = {}, action) => {
     case REMOVE_EVENT:
       delete newState[action.event.id];
       return newState;
+
+    case LOG_OUT:
+      return {};
     default:
       return state;
   }

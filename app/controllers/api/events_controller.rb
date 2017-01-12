@@ -3,7 +3,12 @@ class Api::EventsController < ApplicationController
 
   def index
     # get start_date and end_date and return events within this date range
-    @events = Event.all
+    start_date = DateTime.parse(params['startDate']).utc
+    end_date = DateTime.parse(params['endDate']).utc
+
+    @events = Event.where(
+                user_id: current_user.id,
+                start_date: start_date..end_date)
 
     render :events
   end

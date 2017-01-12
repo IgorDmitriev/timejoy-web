@@ -1,6 +1,7 @@
   import {
     RECEIVE_ERRORS,
-    RECEIVE_CURRENT_USER
+    RECEIVE_CURRENT_USER,
+    LOG_OUT
   } from '../actions/auth_actions.js';
   import deepFreeze from 'deep-freeze';
   import merge from 'lodash/merge';
@@ -28,6 +29,9 @@
             errors: action.errors
           }
         );
+
+      case LOG_OUT:
+        return _nullUser;
 
       default:
         return state;

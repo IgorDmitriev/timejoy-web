@@ -29,7 +29,7 @@ class Event < ApplicationRecord
   end
 
 
-  after_initialize :ensure_updated_address
+  before_save :ensure_updated_address
 
   def ensure_updated_address
     update_address unless formatted_address

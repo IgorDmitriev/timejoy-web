@@ -4,6 +4,7 @@ import * as AuthAPIUtil from '../util/api_auth';
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const RECEIVE_LOGOUT_SUCCESS = 'RECEIVE_LOGOUT_SUCCESS';
 export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
+export const LOG_OUT = 'LOG_OUT';
 
 //regular actions
 
@@ -21,6 +22,10 @@ export const receiveErrors = errors => ({
   errors
 });
 
+export const receiveLogout = () => ({
+  type: LOG_OUT
+});
+
 //thunk actions
 
 export const requestLogin = user => dispatch => {
@@ -33,7 +38,7 @@ export const requestLogin = user => dispatch => {
 
 export const requestLogout = () => dispatch => {
   return AuthAPIUtil.logout().then(
-    () => dispatch(receiveCurrentUser(null))
+    () => dispatch(receiveLogout())
   );
 };
 

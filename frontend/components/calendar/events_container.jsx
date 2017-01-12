@@ -6,14 +6,16 @@ import Events from './events';
 
 const mapStateToProps = state => {
   let events = values(state.events);
+  let currentDate = state.currentDate;
 
   return {
-    events
+    events,
+    currentDate
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchEvents: () => dispatch(fetchEvents())
+  fetchEvents: (startDate, endDate) => dispatch(fetchEvents(startDate, endDate))
 });
 
 export default connect(

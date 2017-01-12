@@ -24,8 +24,8 @@ export const removeEvent = event => ({
 
 // thunk action creators
 
-export const fetchEvents = () => dispatch => (
-  EventAPIUtil.fetchEvents().then(
+export const fetchEvents = (startDate, endDate) => dispatch => (
+  EventAPIUtil.fetchEvents(startDate, endDate).then(
     events => dispatch(receiveEvents(events))
   )
 );

@@ -7,38 +7,46 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 user = User
-        .where(email: 'demo@timejoy.co')
-        .first_or_create do |u|
-          u.email = 'demo@timejoy.co'
-          u.password = 'demoaccount'
-        end
+  .where(email: 'demo@timejoy.co')
+  .first_or_create do |u|
+    u.email = 'demo@timejoy.co'
+    u.password = 'demoaccount'
+  end
 
 user.events << Event.create!(
-  title: 'First event',
+  title: 'First User',
   start_date: Time.now,
   end_date: Time.now + 1.hours,
   address: '160 Spear Street')
 
-user.events << Event.create!(
-  title: 'Second event',
-  start_date: Time.now + 2.hours,
-  end_date: Time.now + 3.hours,
-  address: '20 Silk Tree')
+20.times do
+  h = rand(10)
+  d = rand(3)
+  start_date = Time.now + d.days + h.hours
+  end_date = Time.now + d.days + (h + 1).hours
 
-user.events << Event.create!(
-  title: 'Third event',
-  start_date: Time.now + 4.hours,
-  end_date: Time.now + 5.hours,
-  address: '1518 Pershing Drive')
+  user.events << Event.create( title: Faker::Lorem.sentence(4),
+                               start_date: start_date,
+                               end_date: end_date,
+                               address: Faker::Address.street_address)
+end
 
-user.events << Event.create!(
-  title: 'Fourth event',
-  start_date: Time.now + 6.hours,
-  end_date: Time.now + 8.hours,
-  address: '455 Market Street')
+user2 = User.create(email: 'demo2@timejoy.co', password: 'demoaccount')
 
-user.events << Event.create!(
-  title: 'Fifth event',
-  start_date: Time.now + 8.hours,
-  end_date: Time.now + 9.hours,
-  address: 'Berkeley, CA')
+user2.events << Event.create!(
+  title: 'Second User',
+  start_date: Time.now,
+  end_date: Time.now + 1.hours,
+  address: '160 Spear Street')
+
+10.times do
+  h = rand(10)
+  d = rand(3)
+  start_date = Time.now + d.days + h.hours
+  end_date = Time.now + d.days + (h + 1).hours
+
+  user2.events << Event.create( title: Faker::Lorem.sentence(4),
+                               start_date: start_date,
+                               end_date: end_date,
+                               address: Faker::Address.street_address)
+end
