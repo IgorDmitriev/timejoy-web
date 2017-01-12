@@ -1,6 +1,26 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id                :integer          not null, primary key
+#  title             :string           not null
+#  notes             :text
+#  start_date        :datetime         not null
+#  end_date          :datetime         not null
+#  address           :string
+#  lat               :float
+#  lng               :float
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  formatted_address :string
+#  user_id           :integer
+#
+
 class Event < ApplicationRecord
   validates :title, :start_date, :end_date, presence: true
   validate :correct_date_range
+
+  belongs_to :user
 
   def correct_date_range
     if start_date.present? && end_date.present? && start_date > end_date
