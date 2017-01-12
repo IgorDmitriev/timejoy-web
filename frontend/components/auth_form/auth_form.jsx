@@ -117,16 +117,6 @@ class AuthForm extends React.Component {
             </div>
 
             <div className="auth-demo-option">
-              <div className="auth-or">
-                <span>- or -</span>
-              </div>
-              <div className="auth-demo-description">
-                <span>
-                  I dont want to create an account, but still
-                  interested to see TimeJoy in action.
-                </span>
-              </div>
-              <div className="auth-demo-logo"></div>
               <div className="auth-demo-button-label">Dive in with</div>
               <button className="auth-demo-button"
                 onClick={this.handleSubmit('demo')}>Demo account
@@ -138,5 +128,16 @@ class AuthForm extends React.Component {
     );
   }
 }
+
+// // <div className="auth-or">
+//   <span>- or -</span>
+// </div>
+// <div className="auth-demo-description">
+//   <span>
+//     I dont want to create an account, but still
+//     interested to see TimeJoy in action.
+//   </span>
+// </div>
+// <div className="auth-demo-logo"></div>
 
 export default withRouter(AuthForm);
