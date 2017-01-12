@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 
+import CalendarDateController from './calendar_date_controller_container';
+
 class NavBar extends React.Component {
   constructor (props) {
     super(props);
@@ -23,8 +25,9 @@ class NavBar extends React.Component {
     let email = this.props.currentUser ? this.props.currentUser.email : null;
     return (
       <div className="navbar">
-        Email: {email}
-        <button onClick={this.logout}>Log Out</button>
+        <div className="menu-icon"></div>
+        <CalendarDateController />
+        <div className="profile-icon"></div>
       </div>
     );
   }
