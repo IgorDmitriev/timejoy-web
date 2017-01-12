@@ -184,7 +184,9 @@ class Map extends React.Component {
                 }
             ]
         }
-        ]
+      ],
+      scrollwheel: false,
+      mapTypeControl: false
     };
 
     this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
