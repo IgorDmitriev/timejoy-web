@@ -1,0 +1,40 @@
+.menu-close, .menu-open {
+  background-color: $green;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.menu-close {
+  transition-duration: 0.2s;
+  height: 0;
+
+  button {
+    visibility:hidden;
+  }
+}
+
+.menu-open {
+  transition-duration: 0.2s;
+  height: 50px;
+
+  button {
+    font-family: $Lato;
+    padding: 10px 30px;
+    color: #fff;
+    font-weight: 300;
+    font-size: 14px;
+    background: none;
+  }
+
+  button:hover {
+    cursor: pointer;
+    background-color: $dark-green-opacity;
+    border-radius: 5px;
+  }
+
+  button:active {
+    box-shadow: inset 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+  }
+}

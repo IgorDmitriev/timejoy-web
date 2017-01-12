@@ -1,0 +1,69 @@
+.calendar-tab {
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    .menu-icon {
+      width: 30px;
+      height: 30px;
+      font-size: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .menu-icon:hover {
+      cursor: pointer;
+      background-color: $dark-green-opacity;
+      border-radius: 5px;
+    }
+
+    .menu-icon:active {
+      box-shadow: inset 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .date-controller {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      .previous-icon, .next-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+        margin: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .previous-icon:hover, .next-icon:hover {
+        cursor: pointer;
+        background-color: $dark-green-opacity;
+        border-radius: 5px;
+      }
+
+      .previous-icon:active, .next-icon:active {
+        box-shadow: inset 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      .date-title span {
+        font-family: $Lato;
+        font-size: 20px;
+        font-weight: 300;
+        // letter-spacing: 0.8;
+        text-align: center;
+      }
+
+    }
+
+    .profile-icon {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
