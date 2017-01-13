@@ -8,7 +8,7 @@
 
 u1 = User.find_by(email: 'demo@timejoy.co')
 u1.destroy if u1
-u2 = User.find_by(email: 'demo2@timejoy.co').destroy
+u2 = User.find_by(email: 'demo2@timejoy.co')
 u2.destroy if u2
 
 user = User
