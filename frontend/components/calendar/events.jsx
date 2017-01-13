@@ -1,4 +1,5 @@
 import React from 'react';
+import Event from './event';
 
 class Events extends React.Component {
   constructor (props) {
@@ -23,10 +24,6 @@ class Events extends React.Component {
     const startDate = beginnigOfADay.utc().format();
     const endDate = endingOfADay.utc().format();
 
-    console.log('Current Date', this.props.currentDate);
-    console.log('Start of day:', startDate);
-    console.log('End of day:', endDate);
-
     this.props.fetchEvents(
       startDate,
       endDate
@@ -36,10 +33,10 @@ class Events extends React.Component {
   render () {
     return (
       <div>
-        <ul>
+        <ul className="calendar-events-list">
           {
             this.props.events.map( (event, idx) => (
-              <li key={idx}>{event.title}</li>
+              <Event key={idx} event={event} />
             ))
           }
         </ul>
@@ -47,5 +44,5 @@ class Events extends React.Component {
     );
   }
 }
-
+// <li key={idx}>{event.title}</li>
 export default Events;

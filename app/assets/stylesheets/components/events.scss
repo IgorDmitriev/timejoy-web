@@ -1,8 +1,59 @@
 .calendar-tab {
+  overflow: hidden;
 
-  ul {
-    list-style-type: decimal;
-    
+  .calendar-events-list {
+    height: 100vh;
+    overflow-y: scroll;
+
+
+    .calendar-event {
+      margin: 20px auto;
+      width: 290px;
+      display: flex;
+      flex-direction: column;
+
+
+      .event-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: $green;
+        color: white;
+        border-radius: 5px;
+        padding: 10px 20px;
+        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+
+
+        .event-title {
+          font-size: 18px;
+          font-weight: 400;
+          text-align: center;
+        }
+
+        .event-time-range {
+          font-size: 12px;
+          letter-spacing: 0.5;
+          font-weight: 300;
+        }
+
+        .event-address {
+          font-size: 10px;
+          letter-spacing: 0.4;
+          font-weight: 300;
+        }
+      }
+    }
   }
 
+  .calendar-events-list:after {
+    content: "";
+    display: block;
+    height: 100px;
+  }
+
+  .calendar-events-list::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
 }
