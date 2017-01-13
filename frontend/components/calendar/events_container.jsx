@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { fetchEvents } from '../../actions/event_actions';
 import values from 'lodash/values';
-import sortBy from 'lodash/sortby';
+import sortBy from 'lodash.sortby';
 
 import Events from './events';
 
