@@ -6,9 +6,11 @@ class Api::EventsController < ApplicationController
     start_date = DateTime.parse(params['startDate']).utc
     end_date = DateTime.parse(params['endDate']).utc
 
-    @events = Event.where(
-                user_id: current_user.id,
-                start_date: start_date..end_date)
+    @events =
+      Event
+        .where(user_id: current_user.id,
+               start_date: start_date..end_date)
+        .order(:start_date)
 
     render :events
   end

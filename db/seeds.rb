@@ -25,7 +25,7 @@ user.events << Event.create!(
   start_date = Time.now + d.days + h.hours
   end_date = Time.now + d.days + (h + 1).hours
 
-  user.events << Event.create( title: Faker::Lorem.sentence(4),
+  user.events << Event.create( title: Faker::Hipster.sentence(3),
                                start_date: start_date,
                                end_date: end_date,
                                address: Faker::Address.street_address)

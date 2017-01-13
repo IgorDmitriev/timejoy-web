@@ -16,8 +16,8 @@
       .event-body {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        // justify-content: center;
+        // align-items: center;
         background-color: $green;
         color: white;
         border-radius: 5px;
@@ -28,7 +28,7 @@
         .event-title {
           font-size: 18px;
           font-weight: 400;
-          text-align: center;
+          // text-align: center;
         }
 
         .event-time-range {
@@ -43,6 +43,10 @@
           font-weight: 300;
         }
       }
+    }
+
+    .calendar-event:hover {
+      cursor: pointer;
     }
   }
 

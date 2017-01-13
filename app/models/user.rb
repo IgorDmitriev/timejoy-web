@@ -23,7 +23,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, allow_nil: true
   validates :email, length: { minimum: 6 }
 
-  has_many :events
+  has_many :events, dependent: :destroy
 
   attr_reader :password
 
