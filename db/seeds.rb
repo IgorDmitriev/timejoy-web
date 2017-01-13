@@ -11,12 +11,7 @@ u1.destroy if u1
 u2 = User.find_by(email: 'demo2@timejoy.co')
 u2.destroy if u2
 
-user = User
-  .where(email: 'demo@timejoy.co')
-  .first_or_create do |u|
-    u.email = 'demo@timejoy.co'
-    u.password = 'demoaccount'
-  end
+user = User.create(email: 'demo@timejoy.co', password: 'demoaccount')
 
 user.events << Event.create!(
   title: 'First User',
