@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
 import { fetchEvents } from '../../actions/event_actions';
-import values from 'lodash/values';
-import sortBy from 'lodash.sortby';
+import _ from 'lodash';
 
 import Events from './events';
 
 const mapStateToProps = state => {
-  let events = sortBy(values(state.events), 'start_date');
+  let events = _.sortBy(_.values(state.events), 'start_date');
   let currentDate = state.currentDate;
 
   return {
