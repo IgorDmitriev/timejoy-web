@@ -13,7 +13,7 @@ u2.destroy if u2
 
 user = User.create(email: 'demo@timejoy.co', password: 'demoaccount')
 
-user.events << Event.create!(
+user.events << Event.new(
   title: 'First User',
   start_date: Time.now,
   end_date: Time.now + 1.hours,
@@ -25,7 +25,7 @@ user.events << Event.create!(
   start_date = Time.now + d.days + h.hours
   end_date = Time.now + d.days + (h + 1).hours
 
-  user.events << Event.create( title: Faker::Hipster.sentence(3),
+  user.events << Event.new( title: Faker::Hipster.sentence(3),
                                start_date: start_date,
                                end_date: end_date,
                                address: Faker::Address.street_address)
@@ -33,7 +33,7 @@ end
 
 user2 = User.create(email: 'demo2@timejoy.co', password: 'demoaccount')
 
-user2.events << Event.create!(
+user2.events << Event.new(
   title: 'Second User',
   start_date: Time.now,
   end_date: Time.now + 1.hours,
@@ -45,7 +45,7 @@ user2.events << Event.create!(
   start_date = Time.now + d.days + h.hours
   end_date = Time.now + d.days + (h + 1).hours
 
-  user2.events << Event.create( title: Faker::Lorem.sentence(4),
+  user2.events << Event.new( title: Faker::Lorem.sentence(4),
                                start_date: start_date,
                                end_date: end_date,
                                address: Faker::Address.street_address)
