@@ -6,6 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.find(email: 'demo@timejoy.co').destroy
+User.find(email: 'demo2@timejoy.co').destroy
+
 user = User
   .where(email: 'demo@timejoy.co')
   .first_or_create do |u|
