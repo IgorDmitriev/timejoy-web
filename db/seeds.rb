@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.find(email: 'demo@timejoy.co').destroy
-User.find(email: 'demo2@timejoy.co').destroy
+User.find_by(email: 'demo@timejoy.co').destroy
+User.find_by(email: 'demo2@timejoy.co').destroy
 
 user = User
   .where(email: 'demo@timejoy.co')
