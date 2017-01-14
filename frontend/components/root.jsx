@@ -8,6 +8,7 @@ import { Router,
 // Components
 import App from './app';
 import AuthFormContainer from './auth_form/auth_form_container';
+import EventForm from './event/event_form_container';
 
 
 const Root = ({ store }) => {
@@ -34,11 +35,7 @@ const Root = ({ store }) => {
 
         <Route path="/" component={ App }
           onEnter={ _ensureLoggedIn }>
-          // /favorites
-            // /indexroute
-            // /gaz
-          // /newevent
-
+          <Route path="/new-event" component={ EventForm }/>
         </Route>
       </Router>
     </Provider>

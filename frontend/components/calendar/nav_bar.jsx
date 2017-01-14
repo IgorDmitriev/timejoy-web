@@ -15,12 +15,17 @@ class NavBar extends React.Component {
 
     this.handleMenuToggle = this.handleMenuToggle.bind(this);
     this.handleMenuAutoClose = this.handleMenuAutoClose.bind(this);
+    this.handleAddEvent = this.handleAddEvent.bind(this);
   }
 
   componentDidUpdate () {
     if (!this.props.currentUser) {
       this.props.router.push('/login');
     }
+  }
+
+  handleAddEvent () {
+    this.props.router.push('/new-event');
   }
 
   handleMenuToggle () {
@@ -53,7 +58,8 @@ class NavBar extends React.Component {
           <div className={ menuIconClass }
             onClick={this.handleMenuToggle}></div>
           <CalendarDateController />
-          <div className="profile-icon"></div>
+          <div className="create-new fa fa-plus"
+            onClick={ this.handleAddEvent }></div>
         </div>
         <div className={ menuClass }>
           <button className="menu-settings-option">Settings</button>

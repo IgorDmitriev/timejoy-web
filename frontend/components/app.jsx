@@ -5,9 +5,8 @@ import Map from './map/map.jsx';
 
 const App = ({ children }) => (
   <div className="app">
-    <Calendar>
-      { children }
-    </Calendar>
+    <Calendar />
+    { children }
     <Map />
   </div>
 );

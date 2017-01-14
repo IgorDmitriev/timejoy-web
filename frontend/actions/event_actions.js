@@ -1,5 +1,5 @@
 import * as EventAPIUtil from '../util/api_events';
-
+import { receiveEventFormErrors } from './errors_actions';
 //consts
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS';
 export const RECEIVE_EVENT = 'RECEIVE_EVENT';
@@ -39,17 +39,23 @@ export const fetchEvent = id => dispatch => (
 export const createEvent = event => dispatch => (
   EventAPIUtil.createEvent(event).then(
     newEvent => dispatch(receiveEvent(newEvent))
+  ).fail(
+    error => dispatch(receiveEventFormErrors(error.responseJSON))
   )
 );
 
 export const updateEvent = event => dispatch => (
   EventAPIUtil.updateEvent(event).then(
     updatedEvent => dispatch(receiveEvent(updatedEvent))
+  ).fail(
+    error => dispatch(receiveEventFormErrors(error.responseJSON))
   )
 );
 
 export const deleteEvent = id => dispatch => (
   EventAPIUtil.deleteEvent(id).then(
     deletedEvent => dispatch(removeEvent(deletedEvent))
+  ).fail(
+    error => dispatch(receiveEventFormErrors(error.responseJSON))
   )
 );
