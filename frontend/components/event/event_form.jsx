@@ -5,32 +5,67 @@ import merge from 'lodash/merge';
 class EventForm extends React.Component {
   constructor (props) {
     super(props);
-    console.log(props);
+
+    const startDate =
+      this.props.event.startDate || this.nearestTimeInInterval();
+    const endDate =
+      this.props.event.endDate || this.nearestTimeInInterval().add(30, 'm');
+
+    console.log(startDate, endDate);
 
     this.state = merge({}, props.event, {
-      startDate: props.event.startDate.format('HH:mm'),
-      endDate: props.event.endDate.format('HH:mm'),
+      startDate,
+      endDate,
+      startDateInput: startDate.format('HH:mm'),
+      endDateInput: endDate.format('HH:mm'),
       duration: 30
     });
 
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.changeDuration = this.changeDuration.bind(this);
-    this.convertToData = this.convertToData.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
+
+  nearestTimeInInterval (date = this.props.currentDate.clone(), interval = 15) {
+    const remainder = interval - date.minute() % interval;
+
+    return date.add(remainder, 'm');
+  }
+
   componentDidUpdate (prevProps, prevState) {
-
     // Apply Duration if startDate changed and valid
-    if (prevState.startDate !== this.state.startDate) {
-      let startDate = moment(this.state.startDate, 'HH:mm');
+    // if (prevState.startDate !== this.state.startDate) {
+    //   let startDate = moment(this.state.startDate, 'HH:mm');
+    //   let endDate = moment(this.state.endDate, 'HH:mm');
+    // }
+  }
 
-      if (startDate) {
-        this.setState({
-          endDate: startDate.add(this.state.duration, 'm').format('HH:mm')
-        });
-      }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.params.id !== this.state.id
+     || nextProps.currentDate !== this.props.currentDate) {
+
+      const startDate =
+        nextProps.event.startDate
+        || this.nearestTimeInInterval(nextProps.currentDate.clone());
+      const endDate =
+        nextProps.event.endDate
+        || this.nearestTimeInInterval(nextProps.currentDate.clone())
+               .add(30, 'm');
+
+      const newState = merge(
+        {},
+        nextProps.event,
+        {
+          startDate,
+          endDate,
+          startDateInput: startDate.format('HH:mm'),
+          endDateInput: endDate.format('HH:mm')
+        }
+      );
+
+      this.setState(newState);
     }
   }
 
@@ -44,21 +79,13 @@ class EventForm extends React.Component {
     };
   }
 
-  convertToData (field) {
-    return () => {
-      this.setState({
-        [field]: moment(this.state[field], 'HH:mm')
-      });
-    };
-  }
-
   changeDuration (minutes) {
-    return () => {
-      let startDate = moment(this.state.startDate, 'HH:mm');
+    return (e) => {
+      e.preventDefault();
+      let startDate = moment(this.state.startDateInput, 'HH:mm');
       if (startDate) {
         this.setState({
-          endDate: startDate.add(minutes, 'm').format('HH:mm'),
-          duration: minutes
+          endDateInput: startDate.add(minutes, 'm').format('HH:mm')
         });
       }
     };
@@ -71,8 +98,24 @@ class EventForm extends React.Component {
   handleSubmit (e) {
     e.preventDefault();
     console.log(this.state);
-    const startDate = moment(this.state.startDate, 'HH:mm').utc().format();
-    const endDate = moment(this.state.endDate, 'HH:mm').utc().format();
+
+    const startDateInput = moment(this.state.startDateInput, 'HH:mm');
+    const startHours = startDateInput.get('h');
+    const startMinutes = startDateInput.get('m');
+    const endDateInput = moment(this.state.endDateInput, 'HH:mm');
+    const endHours = endDateInput.get('h');
+    const endMinutes = endDateInput.get('m');
+
+    const startDate = this.state.startDate.clone()
+      .set('h', startHours)
+      .set('m', startMinutes)
+      .utc()
+      .format();
+    const endDate = this.state.endDate.clone()
+      .set('h', endHours)
+      .set('m', endMinutes)
+      .utc()
+      .format();
 
     const event = merge(
       {},
@@ -82,6 +125,7 @@ class EventForm extends React.Component {
         endDate
       }
     );
+
     this.props.formPostAction(event);
   }
 
@@ -120,8 +164,8 @@ class EventForm extends React.Component {
             <label>Start</label>
             <input
               type='time'
-              value={ this.state.startDate }
-              onChange={ this.handleInput('startDate') } />
+              value={ this.state.startDateInput }
+              onChange={ this.handleInput('startDateInput') } />
           </div>
           <div className="duration-buttons">
             <button onClick={ this.changeDuration(15) }>{'15m'}</button>
@@ -133,13 +177,13 @@ class EventForm extends React.Component {
             <label>End</label>
             <input
               type='time'
-              value={ this.state.endDate }
-              onChange={ this.handleInput('endDate') } />
+              value={ this.state.endDateInput }
+              onChange={ this.handleInput('endDateInput') } />
           </div>
           <div className="event-form-notes">
             <label>Notes</label>
             <textarea
-              value={ this.state.notes }
+              value={ this.state.notes || '' }
               onChange={ this.handleInput('notes') }>
             </textarea>
           </div>
@@ -149,23 +193,19 @@ class EventForm extends React.Component {
   }
 }
 
-const roundToInterval = (date, interval = 15) => {
-  const remainder = (interval - date.minute()) % interval;
-  return date.add("minutes", remainder + interval);
-};
 
 EventForm.propTypes = {
   event: React.PropTypes.object,
   formPostAction: React.PropTypes.func.isRequired,
-  errors: React.PropTypes.arrayOf(React.PropTypes.string)
+  errors: React.PropTypes.arrayOf(React.PropTypes.string),
+  currentDate: React.PropTypes.object
 };
 
 EventForm.defaultProps = {
   event: {
+    id: 0,
     title: '',
     notes: '',
-    startDate: roundToInterval(moment()),
-    endDate: roundToInterval(moment()).add(30, 'm'),
     address: ''
   },
   errors: []

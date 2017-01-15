@@ -2,9 +2,10 @@ json.extract! event,
               :id,
               :title,
               :notes,
-              :start_date,
-              :end_date,
               :address,
               :formatted_address,
               :lat,
               :lng
+
+json.startDate event.start_date
+json.endDate event.end_date

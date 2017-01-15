@@ -23,6 +23,7 @@ class Api::EventsController < ApplicationController
     @event.user = current_user
     @event.title = event_params[:title]
     @event.notes = event_params[:notes]
+    @event.address = event_params[:address]
     @event.start_date = DateTime.parse(event_params[:startDate]).utc
     @event.end_date = DateTime.parse(event_params[:endDate]).utc
     p 'New event'

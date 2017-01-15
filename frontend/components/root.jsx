@@ -36,6 +36,7 @@ const Root = ({ store }) => {
         <Route path="/" component={ App }
           onEnter={ _ensureLoggedIn }>
           <Route path="/new-event" component={ EventForm }/>
+          <Route path="/events/:id/edit" component={ EventForm }/>
         </Route>
       </Router>
     </Provider>
