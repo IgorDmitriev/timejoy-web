@@ -1,5 +1,6 @@
 import {
-  RECEIVE_EVENT_FORM_ERRORS
+  RECEIVE_EVENT_FORM_ERRORS,
+  CLEAR_EVENT_FORM_ERRORS
 } from '../actions/errors_actions';
 import deepFreeze from 'deep-freeze';
 import merge from 'lodash/merge';
@@ -14,6 +15,9 @@ const ErrorsReducer = (state = _nullErrors, action) => {
   switch (action.type) {
     case RECEIVE_EVENT_FORM_ERRORS:
       newState.eventFormErrors = action.errors;
+      return newState;
+    case CLEAR_EVENT_FORM_ERRORS:
+      newState.eventFormErrors = [];
       return newState;
     default:
       return state;

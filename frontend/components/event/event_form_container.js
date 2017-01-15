@@ -1,8 +1,14 @@
 import { connect } from 'react-redux';
 import EventForm from './event_form';
 import moment from 'moment';
+import merge from 'lodash/merge';
 
-import { createEvent, updateEvent } from '../../actions/event_actions';
+import {
+  createEvent,
+  updateEvent,
+  deleteEvent } from '../../actions/event_actions';
+import {
+  clearEventFormErrors } from '../../actions/errors_actions';
 
 const mapStateToProps = (state, ownProps) => {
   let props = {
@@ -11,14 +17,17 @@ const mapStateToProps = (state, ownProps) => {
   };
 
   if (ownProps.params.id) {
-    // debugger
-    const event = state.events[ownProps.params.id];
+    const event = merge(
+      {},
+      state.events[ownProps.params.id]
+    );
 
     if (event) {
-      event.startDate = moment(event.startDate);
-      event.endDate = moment(event.endDate);
+      event['startDate'] = moment(event.startDate);
+      event['endDate'] = moment(event.endDate);
 
       props['event'] = event;
+      props['formButtonName'] = 'UPDATE';
     }
   }
 
@@ -33,8 +42,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     formPostAction = event => dispatch(createEvent(event));
   }
 
+
   return ({
-    formPostAction
+    formPostAction,
+    deleteEvent: id => dispatch(deleteEvent(id)),
+    clearErrors: () => dispatch(clearEventFormErrors())
   });
 };
 

@@ -11,8 +11,6 @@ class EventForm extends React.Component {
     const endDate =
       this.props.event.endDate || this.nearestTimeInInterval().add(30, 'm');
 
-    console.log(startDate, endDate);
-
     this.state = merge({}, props.event, {
       startDate,
       endDate,
@@ -25,21 +23,13 @@ class EventForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.changeDuration = this.changeDuration.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
-
 
   nearestTimeInInterval (date = this.props.currentDate.clone(), interval = 15) {
     const remainder = interval - date.minute() % interval;
 
     return date.add(remainder, 'm');
-  }
-
-  componentDidUpdate (prevProps, prevState) {
-    // Apply Duration if startDate changed and valid
-    // if (prevState.startDate !== this.state.startDate) {
-    //   let startDate = moment(this.state.startDate, 'HH:mm');
-    //   let endDate = moment(this.state.endDate, 'HH:mm');
-    // }
   }
 
   componentWillReceiveProps (nextProps) {
@@ -92,12 +82,12 @@ class EventForm extends React.Component {
   }
 
   handleClose () {
+    this.props.clearErrors();
     this.props.router.push('/');
   }
 
   handleSubmit (e) {
     e.preventDefault();
-    console.log(this.state);
 
     const startDateInput = moment(this.state.startDateInput, 'HH:mm');
     const startHours = startDateInput.get('h');
@@ -126,68 +116,94 @@ class EventForm extends React.Component {
       }
     );
 
-    this.props.formPostAction(event);
+    this.props.formPostAction(event).then(this.handleClose);
+
+  }
+
+  handleDelete (e) {
+    e.preventDefault();
+
+    this.props.deleteEvent(this.state.id).then(this.handleClose);
+  }
+
+  deleteButton() {
+    if (!this.state.id) return null;
+
+    return (
+      <div className="event-delete">
+        <button
+          className="event-delete-button"
+          onClick={ this.handleDelete }>
+          DELETE
+        </button>
+      </div>
+    );
   }
 
   render () {
     return (
       <div className="event-form-tab">
-        <div className="navbar">
-          <button onClick={ this.handleClose }>CLOSE</button>
-          <span>Event Form</span>
-          <button onClick={ this.handleSubmit }>SAVE</button>
+        <div>
+          <div className="navbar">
+            <button onClick={ this.handleClose }>CLOSE</button>
+            <span>Event</span>
+            <button onClick={ this.handleSubmit }>
+              { this.props.formButtonName }
+            </button>
+          </div>
+          <div className="event-form-errors">
+            <ul>
+              { this.props.errors.map( (error, idx) => (
+                <li key={idx}>{ error }</li>
+              )) }
+            </ul>
+          </div>
+          <form className="event-form">
+            <div className="event-form-title">
+              <label>Title</label>
+              <input
+                autoFocus
+                type="text"
+                value={ this.state.title }
+                onChange={ this.handleInput('title') }/>
+            </div>
+            <div className="event-form-address">
+              <label>Address</label>
+              <input
+                type="text"
+                value={ this.state.address }
+                onChange={ this.handleInput('address') }/>
+            </div>
+            <div className="event-form-start">
+              <label>Start</label>
+              <input
+                type='time'
+                value={ this.state.startDateInput }
+                onChange={ this.handleInput('startDateInput') } />
+            </div>
+            <div className="duration-buttons">
+              <button onClick={ this.changeDuration(15) }>{'15m'}</button>
+              <button onClick={ this.changeDuration(30) }>{'30m'}</button>
+              <button onClick={ this.changeDuration(60) }>{'1h'}</button>
+              <button onClick={ this.changeDuration(120) }>{'2h'}</button>
+            </div>
+            <div className="event-form-end">
+              <label>End</label>
+              <input
+                type='time'
+                value={ this.state.endDateInput }
+                onChange={ this.handleInput('endDateInput') } />
+            </div>
+            <div className="event-form-notes">
+              <label>Notes</label>
+              <textarea
+                value={ this.state.notes || '' }
+                onChange={ this.handleInput('notes') }>
+              </textarea>
+            </div>
+          </form>
         </div>
-        <div className="event-form-errors">
-          <ul>
-            { this.props.errors.map( (error, idx) => (
-              <li key={idx}>{ error }</li>
-            )) }
-          </ul>
-        </div>
-        <form className="event-form">
-          <div className="event-form-title">
-            <label>Title</label>
-            <input
-              autoFocus
-              type="text"
-              value={ this.state.title }
-              onChange={ this.handleInput('title') }/>
-          </div>
-          <div className="event-form-address">
-            <label>Address</label>
-            <input
-              type="text"
-              value={ this.state.address }
-              onChange={ this.handleInput('address') }/>
-          </div>
-          <div className="event-form-start">
-            <label>Start</label>
-            <input
-              type='time'
-              value={ this.state.startDateInput }
-              onChange={ this.handleInput('startDateInput') } />
-          </div>
-          <div className="duration-buttons">
-            <button onClick={ this.changeDuration(15) }>{'15m'}</button>
-            <button onClick={ this.changeDuration(30) }>{'30m'}</button>
-            <button onClick={ this.changeDuration(60) }>{'1h'}</button>
-            <button onClick={ this.changeDuration(120) }>{'2h'}</button>
-          </div>
-          <div className="event-form-end">
-            <label>End</label>
-            <input
-              type='time'
-              value={ this.state.endDateInput }
-              onChange={ this.handleInput('endDateInput') } />
-          </div>
-          <div className="event-form-notes">
-            <label>Notes</label>
-            <textarea
-              value={ this.state.notes || '' }
-              onChange={ this.handleInput('notes') }>
-            </textarea>
-          </div>
-        </form>
+        { this.deleteButton() }
       </div>)
     ;
   }
@@ -197,17 +213,18 @@ class EventForm extends React.Component {
 EventForm.propTypes = {
   event: React.PropTypes.object,
   formPostAction: React.PropTypes.func.isRequired,
+  formButtonName: React.PropTypes.string,
   errors: React.PropTypes.arrayOf(React.PropTypes.string),
   currentDate: React.PropTypes.object
 };
 
 EventForm.defaultProps = {
   event: {
-    id: 0,
     title: '',
     notes: '',
     address: ''
   },
+  formButtonName: 'CREATE',
   errors: []
 };
 

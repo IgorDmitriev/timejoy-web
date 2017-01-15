@@ -19,15 +19,8 @@ class Api::EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new
+    @event = Event.new(event_params)
     @event.user = current_user
-    @event.title = event_params[:title]
-    @event.notes = event_params[:notes]
-    @event.address = event_params[:address]
-    @event.start_date = DateTime.parse(event_params[:startDate]).utc
-    @event.end_date = DateTime.parse(event_params[:endDate]).utc
-    p 'New event'
-    p @event
 
     if @event.save
       render :show
@@ -59,12 +52,15 @@ class Api::EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(
-      :title,
-      :notes,
-      :startDate,
-      :endDate,
-      :address
-    )
+    event = {}
+
+    event[:id] = params[:event][:id]
+    event[:title] = params[:event][:title]
+    event[:notes] = params[:event][:notes]
+    event[:address] = params[:event][:address]
+    event[:start_date] = DateTime.parse(params[:event][:startDate]).utc
+    event[:end_date] = DateTime.parse(params[:event][:endDate]).utc
+
+    event
   end
 end
