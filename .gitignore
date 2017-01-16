@@ -26,3 +26,6 @@ npm-debug.log
 
 database.yml
 secrets.yml
+
+# Ignore application configuration
+/config/application.yml

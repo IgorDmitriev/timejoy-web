@@ -7,6 +7,7 @@ end
 
 gem 'geocoder'
 gem 'faker'
+gem "figaro"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
