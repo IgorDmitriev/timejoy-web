@@ -30,6 +30,7 @@ class Event < ApplicationRecord
 
 
   before_save :ensure_updated_address
+  before_update :update_address, if: :address_changed?
 
   def ensure_updated_address
     update_address unless formatted_address
