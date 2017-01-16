@@ -1,6 +1,7 @@
 import React from 'react';
 import Calendar from './calendar/calendar';
-import Map from './map/map.jsx';
+import Map from './map/mapContainer';
+// import EventMarkers from './map/eventMarkersContainer';
 
 
 const App = ({ children }) => (
