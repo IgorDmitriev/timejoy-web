@@ -37,10 +37,16 @@ class Event < ApplicationRecord
   end
 
   def update_address
-    return unless address
+    return false unless address
 
     geocoder_response = Geocoder.search(address).first
-    return unless geocoder_response
+    unless geocoder_response
+      self.formatted_address = nil
+      self.lat = nil
+      self.lng = nil
+
+      return false
+    end
 
     self.formatted_address = geocoder_response.formatted_address
     self.lat = geocoder_response.geometry['location']['lat']
