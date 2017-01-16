@@ -29,8 +29,9 @@ class Event < ApplicationRecord
     end
   end
 
+  before_create :ensure_updated_address
+  after_create :include_new_event_in_route, if: :formatted_address_present?
 
-  before_save :ensure_updated_address
   before_update :update_address, if: :address_changed?
 
   def ensure_updated_address
@@ -54,5 +55,60 @@ class Event < ApplicationRecord
     self.lng = geocoder_response.geometry['location']['lng']
 
     true
+  end
+
+  def include_new_event_in_route
+    # TODO set initial location to home/work if user has home/work address
+    return unless previous_event
+
+    new_direction =
+      Direction.new(
+        start_address: previous_event.formatted_address,
+        end_address: formatted_address
+      )
+
+    self.direction = new_direction.encoded_polyline ? new_direction : nil
+
+    # TODO set last location to home/work if user has home/work address
+    return unless next_event
+
+    return if next_event.direction &&
+      next_event.direction.start_address == formatted_address
+
+    new_direction_for_next_event =
+      Direction.new(
+        start_address: formatted_address,
+        end_address: next_event.formatted_address
+      )
+
+    next_event.direction =
+      if new_direction_for_next_event.encoded_polyline
+        new_direction_for_next_event
+      end
+
+  end
+
+  def previous_event
+    @previous_event ||=
+      Event
+        .where(user_id: user.id,
+               start_date: (start_date.beginning_of_day)..(start_date - 1))
+        .where.not(formatted_address: nil)
+        .sort_by(&:start_date)
+        .last
+  end
+
+  def next_event
+    @next_event ||=
+      Event
+        .where(user_id: user.id,
+               start_date: (start_date + 1)..(start_date.end_of_day))
+        .where.not(formatted_address: nil)
+        .sort_by(&:start_date)
+        .first
+  end
+
+  def formatted_address_present?
+    formatted_address.present?
   end
 end

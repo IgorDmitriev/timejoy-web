@@ -6,7 +6,8 @@ class Direction < ApplicationRecord
             :encoded_polyline,
             presence: true
 
-  after_initialize :request_directions_from_google
+  after_initialize :request_directions_from_google,
+                   unless: :encoded_polyline_present?
 
   belongs_to :event
 
@@ -41,5 +42,9 @@ class Direction < ApplicationRecord
     self.duration_text = route[:duration][:text]
     self.distance_value = route[:distance][:value]
     self.distance_text = route[:distance][:text]
+  end
+
+  def encoded_polyline_present?
+    encoded_polyline.present?
   end
 end
