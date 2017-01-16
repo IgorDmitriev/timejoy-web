@@ -18,12 +18,13 @@ class Event extends React.Component {
     const { event } = this.props;
     const startDate = moment(event.startDate).format('h:mma');
     const endDate = moment(event.endDate).format('h:mma');
+    const eventClass = event.formatted_address ? 'event-body' : 'event-body grey';
 
     return (
       <li className="calendar-event">
         <div className="event-start-trip-message"></div>
         <div className="event-travel-time"></div>
-        <div className="event-body"
+        <div className={ eventClass }
           onClick={ this.handleEditEvent }>
           <span className="event-title">{ event.title }</span>
           <span className="event-time-range">{ startDate } - { endDate }</span>

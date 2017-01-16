@@ -45,6 +45,11 @@
           font-weight: 300;
         }
       }
+
+      .event-body.grey {
+        background-color: rgba(102, 102, 102, 0.5);
+        margin-left: 50px;
+      }
     }
 
     .calendar-event:hover {
