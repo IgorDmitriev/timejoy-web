@@ -31,22 +31,12 @@ class EventMarker extends React.Component {
     const map = this.props.map;
     const position = new google.maps.LatLng(lat, lng);
 
-    this.marker = new CustomMarker(id, title, position, map);
-  }
-
-  renderMarker () {
-    const { lat, lng } = this.props.event;
-    const eventId = this.props.event.id;
-    const map = this.props.map;
-    const position = new google.maps.LatLng(lat, lng);
-    const title = this.props.event.title;
-
-    this.marker = new google.maps.Marker({
-      map,
-      position,
-      eventId,
+    this.marker = new CustomMarker({
+      id,
       title,
-      label: title
+      position,
+      map,
+      styleClass: 'event-marker'
     });
   }
 

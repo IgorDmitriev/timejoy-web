@@ -9,8 +9,14 @@ const mapStateToProps = state => {
     event => event.lat && event.lng
   );
 
+  const allDirections = [];
+  eventsWithLocation.forEach( (event, idx) => {
+    if (event.direction) allDirections.push(event.direction);
+  });
+
   return ({
-    events: eventsWithLocation
+    events: eventsWithLocation,
+    allDirections
   });
 };
 

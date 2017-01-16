@@ -11,6 +11,7 @@ class Api::EventsController < ApplicationController
         .where(user_id: current_user.id,
                start_date: start_date..end_date)
         .order(:start_date)
+        .includes(:direction)
 
     render :events
   end
@@ -19,6 +20,7 @@ class Api::EventsController < ApplicationController
   end
 
   def create
+    Time.zone = current_user.timezone
     @event = Event.new(event_params)
     @event.user = current_user
 
@@ -38,6 +40,7 @@ class Api::EventsController < ApplicationController
   end
 
   def update
+    Time.zone = current_user.timezone
     if @event.update(event_params)
       render :show
     else

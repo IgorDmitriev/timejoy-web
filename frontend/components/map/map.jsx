@@ -1,17 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import EventMarker from './eventMarker';
 
-const camelize = str => {
-  return str.split(' ').map(function(word){
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  }).join('');
-};
+import EventMarker from './eventMarker';
+import DirectionsPolyline from './directionsPolyline';
+import DirectionsMarker from './directionsMarker';
 
 class Map extends React.Component {
   constructor (props) {
     super (props);
-
+    console.log(props);
     const { lat, lng } = this.props.mapOptions.center;
     this.state = {
       currentLocation: {
@@ -20,27 +17,19 @@ class Map extends React.Component {
       }
     };
 
-    this.handleEvent = this.handleEvent.bind(this);
+    // this.handleEvent = this.handleEvent.bind(this);
   }
 
   componentDidMount () {
-    if (google) {
-      this.loadMap();
-    }
+    if (google) this.loadMap();
   }
 
   componentDidUpdate () {
-    if (!this.map && google) {
-      this.loadMap();
-    }
-
-    if (this.map.getZoom() > 15) {
-      this.map.setZoom(15);
-    }
+    if (!this.map && google) this.loadMap();
+    if (this.map.getZoom() > 15) this.map.setZoom(15);
   }
 
   loadMap () {
-
     const maps = google.maps;
 
     const mapRef = this.refs.map;
@@ -48,34 +37,35 @@ class Map extends React.Component {
 
     this.map = new maps.Map(node, this.props.mapOptions);
 
-    const eventsNames = ['click', 'dragend'];
-
-    eventsNames.forEach(e => {
-      this.map.addListener(e, this.handleEvent(e));
-    });
-
+    // TODO handle events on map
+    // const eventsNames = ['click', 'dragend'];
+    //
+    // eventsNames.forEach(e => {
+    //   this.map.addListener(e, this.handleEvent(e));
+    // });
   }
 
-  handleEvent(evtName) {
-    const handlerName = `on${camelize(evtName)}`;
+  // TODO handle events on map
+  // handleEvent(evtName) {
+  //   const handlerName = `on${camelize(evtName)}`;
+  //
+  //   return e => {
+  //     if (this.props[handlerName]) {
+  //       this.props[handlerName](this.props, this.map, e);
+  //     }
+  //   };
+  // }
 
-    return e => {
-      if (this.props[handlerName]) {
-        this.props[handlerName](this.props, this.map, e);
-      }
-    };
-  }
-
-  renderEventsMarkers() {
-    const events = this.props.events;
-    const map = this.map;
-    const bounds = new google.maps.LatLngBounds();
+  renderEventsMarkers () {
+    const { events } = this.props,
+          map = this.map,
+          bounds = new google.maps.LatLngBounds();
 
     const eventsMarkers = events.map( (event, idx) => {
-      const { lat, lng } = event;
-      const markerPos = new google.maps.LatLng(lat, lng);
-      bounds.extend(markerPos);
+      const { lat, lng } = event,
+            markerPos = new google.maps.LatLng(lat, lng);
 
+      bounds.extend(markerPos);
       return (
         <EventMarker
           key={ idx }
@@ -85,22 +75,47 @@ class Map extends React.Component {
       );
     });
 
-    if (map && events.length !== 0) {
-      map.fitBounds(bounds);
-    }
+    if (map && events.length !== 0) map.fitBounds(bounds);
+
     return eventsMarkers;
+  }
+
+  renderAllDirections () {
+    const { allDirections } = this.props,
+          map = this.map;
+
+    const allDirectionsPolylines =
+      allDirections.map( (direction, idx) => (
+        <DirectionsPolyline
+          key={ idx }
+          map={ map }
+          direction={ direction }
+          >
+          <DirectionsMarker
+            key={ idx }
+            map={ map }
+            direction={ direction }
+            />
+        </DirectionsPolyline>
+      ));
+
+    return allDirectionsPolylines;
   }
 
   render () {
     return (
       <div ref='map' id='map'>
         { this.renderEventsMarkers() }
+        { this.renderAllDirections() }
       </div>
     );
   }
 }
 
 Map.propTypes = {
+  events: React.PropTypes.array,
+  allDirections: React.PropTypes.array,
+  mapOptions: React.PropTypes.object
 };
 
 Map.defaultProps = {
@@ -289,3 +304,9 @@ Map.defaultProps = {
 };
 
 export default Map;
+
+const camelize = str => {
+  return str.split(' ').map(function(word){
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join('');
+};

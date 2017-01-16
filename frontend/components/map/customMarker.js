@@ -1,7 +1,8 @@
-function CustomMarker(id, title, latlng,  map) {
+function CustomMarker({id, title, position, map, styleClass}) {
   this.eventId = id;
   this.title = title;
-  this.latlng_ = latlng;
+  this.position_ = position;
+  this.styleClass = styleClass;
   this.setMap(map);
 }
 
@@ -13,6 +14,7 @@ CustomMarker.prototype.draw = function() {
   if (!div) {
     div = this.div_ = document.createElement('DIV');
     div.classList.add('custom-marker');
+    div.classList.add(this.styleClass);
     $(div).data('eventId', this.eventId);
 
     $(div).append(
@@ -31,7 +33,7 @@ CustomMarker.prototype.draw = function() {
   const midWidth = $(div).width() / 2;
   const heigth = $(div).height();
 
-  const point = this.getProjection().fromLatLngToDivPixel(this.latlng_);
+  const point = this.getProjection().fromLatLngToDivPixel(this.position_);
   if (point) {
     div.style.left = point.x - midWidth + 'px';
     div.style.top = point.y - heigth + 'px';
@@ -46,7 +48,7 @@ CustomMarker.prototype.remove = function() {
 };
 
 CustomMarker.prototype.getPosition = function() {
- return this.latlng_;
+ return this.position_;
 };
 
 export default CustomMarker;
