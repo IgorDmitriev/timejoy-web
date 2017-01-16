@@ -1,4 +1,14 @@
 Rails.application.configure do
+
+  require 'google_maps_service'
+
+  GoogleMapsService.configure do |config|
+    config.key = ENV['google_api_key']
+    config.retry_timeout = 20
+    config.queries_per_second = 10
+  end
+
+
   # Settings specified here will take precedence over those in config/application.rb.
   config.serve_static_files = true
   # Code is not reloaded between requests.

@@ -10,29 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170116171056) do
+ActiveRecord::Schema.define(version: 20170116175557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "directions", force: :cascade do |t|
     t.integer  "event_id"
-    t.string   "start_address",                             null: false
+    t.string   "start_address",                        null: false
     t.float    "start_lat"
     t.float    "start_lng"
-    t.string   "end_address",                               null: false
+    t.string   "end_address",                          null: false
     t.float    "end_lat"
     t.float    "end_lng"
-    t.integer  "travel_duration_value",                     null: false
-    t.string   "travel_duration_text"
-    t.integer  "travel_distance_value",                     null: false
-    t.string   "travel_distance_text"
-    t.text     "encoded_polyline",                          null: false
+    t.integer  "duration_value",                       null: false
+    t.string   "duration_text"
+    t.integer  "distance_value",                       null: false
+    t.string   "distance_text"
+    t.text     "encoded_polyline",                     null: false
     t.datetime "departure_time"
     t.datetime "arrival_time"
-    t.string   "travel_mode",           default: "driving"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.string   "travel_mode",      default: "driving"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.index ["end_address"], name: "index_directions_on_end_address", using: :btree
     t.index ["event_id"], name: "index_directions_on_event_id", using: :btree
     t.index ["start_address"], name: "index_directions_on_start_address", using: :btree

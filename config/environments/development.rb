@@ -5,6 +5,15 @@ Rails.application.configure do
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
 
+
+  require 'google_maps_service'
+
+  GoogleMapsService.configure do |config|
+    config.key = ENV['google_api_key']
+    config.retry_timeout = 20
+    config.queries_per_second = 10
+  end
+
   # livereload
   config.middleware.insert_before Rack::Runtime, Rack::LiveReload
 
