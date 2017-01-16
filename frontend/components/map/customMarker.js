@@ -21,14 +21,12 @@ CustomMarker.prototype.draw = function() {
     );
 
     google.maps.event.addDomListener(div, "click", function(event) {
-      console.log($(event.target));
+      // console.log($(event.target));
     });
 
     const panes = this.getPanes();
     panes.overlayImage.appendChild(div);
   }
-  console.log('W ', $(div).width());
-  console.log('H ', $(div).height());
 
   const midWidth = $(div).width() / 2;
   const heigth = $(div).height();

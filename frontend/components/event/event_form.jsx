@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import moment from 'moment';
 import merge from 'lodash/merge';
 
@@ -24,12 +25,21 @@ class EventForm extends React.Component {
     this.changeDuration = this.changeDuration.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.updateAddress = this.updateAddress.bind(this);
   }
 
   nearestTimeInInterval (date = this.props.currentDate.clone(), interval = 15) {
     const remainder = interval - date.minute() % interval;
 
     return date.add(remainder, 'm');
+  }
+
+  componentDidMount () {
+    this.initAutocomplete();
+  }
+
+  componentDidUpdate () {
+
   }
 
   componentWillReceiveProps (nextProps) {
@@ -57,6 +67,26 @@ class EventForm extends React.Component {
 
       this.setState(newState);
     }
+  }
+
+  initAutocomplete () {
+    const autoCompleteRef = this.refs.addressAutocomplete;
+    const node = ReactDOM.findDOMNode(autoCompleteRef);
+
+    if (google && !this.addressAutocomplete) {
+      this.addressAutocomplete = new google.maps.places.Autocomplete(
+        node
+      );
+      this.addressAutocomplete.addListener('place_changed', this.updateAddress);
+    }
+  }
+
+  updateAddress () {
+    const place = this.addressAutocomplete.getPlace();
+    const address = place.formatted_address;
+    this.setState({
+      address
+    });
   }
 
   handleInput (field) {
@@ -171,6 +201,7 @@ class EventForm extends React.Component {
               <label>Address</label>
               <input
                 type="text"
+                ref="addressAutocomplete"
                 value={ this.state.address }
                 onChange={ this.handleInput('address') }/>
             </div>
