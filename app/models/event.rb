@@ -21,6 +21,7 @@ class Event < ApplicationRecord
   validate :correct_date_range
 
   belongs_to :user
+  has_one :direction
 
   def correct_date_range
     if start_date.present? && end_date.present? && start_date > end_date

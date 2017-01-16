@@ -8,6 +8,9 @@ end
 gem 'geocoder'
 gem 'faker'
 gem "figaro"
+gem 'google_maps_service',
+    git: "git://github.com/IgorDmitriev/google-maps-services-ruby.git",
+    branch: "master"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

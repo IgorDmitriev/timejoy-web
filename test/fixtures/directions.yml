@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event_id: 1
+  start_address: MyString
+  start_lat: 1.5
+  start_lng: 1.5
+  end_address: MyString
+  end_lat: 1.5
+  end_lng: 1.5
+  travel_duration_value: 1
+  travel_duration_text: MyString
+  travel_distance_value: 1
+  travel_distance_text: MyString
+  encoded_polyline: MyText
+  departure_time: 2017-01-16 09:10:56
+  arrival_time: 2017-01-16 09:10:56
+  travel_mode: MyString
+
+two:
+  event_id: 1
+  start_address: MyString
+  start_lat: 1.5
+  start_lng: 1.5
+  end_address: MyString
+  end_lat: 1.5
+  end_lng: 1.5
+  travel_duration_value: 1
+  travel_duration_text: MyString
+  travel_distance_value: 1
+  travel_distance_text: MyString
+  encoded_polyline: MyText
+  departure_time: 2017-01-16 09:10:56
+  arrival_time: 2017-01-16 09:10:56
+  travel_mode: MyString

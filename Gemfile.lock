@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/IgorDmitriev/google-maps-services-ruby.git
+  revision: 0e7337bd6df910f98c432245a0a773de4fdebcd4
+  branch: master
+  specs:
+    google_maps_service (0.4.2)
+      hurley (~> 0.1)
+      multi_json (~> 1.11)
+      retriable (~> 2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -92,6 +102,7 @@ GEM
       guard-compat (~> 1.0)
       multi_json (~> 1.8)
     http_parser.rb (0.6.0)
+    hurley (0.2)
     i18n (0.7.0)
     jbuilder (2.6.1)
       activesupport (>= 3.0.0, < 5.1)
@@ -168,6 +179,7 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    retriable (2.1.0)
     sass (3.4.23)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -218,6 +230,7 @@ DEPENDENCIES
   faker
   figaro
   geocoder
+  google_maps_service!
   guard-livereload (~> 2.5)
   jbuilder (~> 2.5)
   jquery-rails
