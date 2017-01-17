@@ -34,6 +34,12 @@ class Event < ApplicationRecord
 
   before_update :update_address, if: :address_changed?
 
+  after_destroy :analyze_next_event, if: :formatted_address_present?
+
+  def analyze_next_event
+    next_event.calculate_directions
+  end
+
   def ensure_updated_address
     update_address unless formatted_address
   end
@@ -57,9 +63,9 @@ class Event < ApplicationRecord
     true
   end
 
-  def include_new_event_in_route
+  def calculate_directions
     # TODO set initial location to home/work if user has home/work address
-    return unless previous_event
+    self.direction = nil && return unless previous_event
 
     new_direction =
       Direction.new(
@@ -68,6 +74,10 @@ class Event < ApplicationRecord
       )
 
     self.direction = new_direction.encoded_polyline ? new_direction : nil
+  end
+
+  def include_new_event_in_route
+    calculate_directions
 
     # TODO set last location to home/work if user has home/work address
     return unless next_event
