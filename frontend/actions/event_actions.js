@@ -38,7 +38,7 @@ export const fetchEvent = id => dispatch => (
 
 export const createEvent = event => dispatch => (
   EventAPIUtil.createEvent(event).then(
-    newEvent => dispatch(receiveEvent(newEvent))
+    events => dispatch(receiveEvents(events))
   ).fail(
     error => dispatch(receiveEventFormErrors(error.responseJSON))
   )
@@ -46,7 +46,7 @@ export const createEvent = event => dispatch => (
 
 export const updateEvent = event => dispatch => (
   EventAPIUtil.updateEvent(event).then(
-    updatedEvent => dispatch(receiveEvent(updatedEvent))
+    events => dispatch(receiveEvents(events))
   ).fail(
     error => dispatch(receiveEventFormErrors(error.responseJSON))
   )
@@ -54,7 +54,7 @@ export const updateEvent = event => dispatch => (
 
 export const deleteEvent = id => dispatch => (
   EventAPIUtil.deleteEvent(id).then(
-    deletedEvent => dispatch(removeEvent(deletedEvent))
+    events => dispatch(receiveEvents(events))
   ).fail(
     error => dispatch(receiveEventFormErrors(error.responseJSON))
   )

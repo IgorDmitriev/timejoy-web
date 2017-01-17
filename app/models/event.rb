@@ -108,6 +108,10 @@ class Event < ApplicationRecord
         .first
   end
 
+  def current_day
+    [start_date.beginning_of_day, start_date.end_of_day]
+  end
+
   def formatted_address_present?
     formatted_address.present?
   end

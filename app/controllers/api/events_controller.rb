@@ -6,12 +6,7 @@ class Api::EventsController < ApplicationController
     start_date = DateTime.parse(params['startDate']).utc
     end_date = DateTime.parse(params['endDate']).utc
 
-    @events =
-      Event
-        .where(user_id: current_user.id,
-               start_date: start_date..end_date)
-        .order(:start_date)
-        .includes(:direction)
+    @events = get_events_by_date_range(start_date, end_date)
 
     render :events
   end
@@ -25,15 +20,23 @@ class Api::EventsController < ApplicationController
     @event.user = current_user
 
     if @event.save
-      render :show
+      start_date, end_date = @event.current_day
+      @events = get_events_by_date_range(start_date, end_date)
+
+      render :events
     else
       render json: @event.errors.full_messages, status: 422
     end
   end
 
   def destroy
+    Time.zone = current_user.timezone
+
     if @event.destroy
-      render :show
+      start_date, end_date = @event.current_day
+      @events = get_events_by_date_range(start_date, end_date)
+
+      render :events
     else
       render json: @event.errors.full_messages, status: 422
     end
@@ -42,13 +45,26 @@ class Api::EventsController < ApplicationController
   def update
     Time.zone = current_user.timezone
     if @event.update(event_params)
-      render :show
+      start_date, end_date = @event.current_day
+      @events = get_events_by_date_range(start_date, end_date)
+      
+      render :events
     else
       render json: @event.errors.full_messages, status: 422
     end
   end
 
   private
+
+  def get_events_by_date_range(start_date, end_date)
+    Time.zone = 'UTC'
+
+    Event
+      .where(user_id: current_user.id,
+             start_date: start_date..end_date)
+      .order(:start_date)
+      .includes(:direction)
+  end
 
   def set_event
     @event = Event.find(params[:id])

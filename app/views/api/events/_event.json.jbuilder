@@ -7,8 +7,8 @@ json.extract! event,
               :lat,
               :lng
 
-json.startDate event.start_date
-json.endDate event.end_date
+json.startDate event.start_date.utc
+json.endDate event.end_date.utc
 
 json.set! :direction do
   json.partial! 'api/events/direction', direction: event.direction
