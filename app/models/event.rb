@@ -38,7 +38,7 @@ class Event < ApplicationRecord
   after_destroy :analyze_next_event, if: :formatted_address_present?
 
   def analyze_next_event
-    next_event.calculate_directions
+    next_event.calculate_directions if next_event
   end
 
   def ensure_updated_address
