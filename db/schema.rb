@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170116175557) do
+ActiveRecord::Schema.define(version: 20170117191301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.integer  "user_id",                  null: false
+    t.string   "title",                    null: false
+    t.string   "icon_id",    default: "0"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["user_id"], name: "index_categories_on_user_id", using: :btree
+  end
 
   create_table "directions", force: :cascade do |t|
     t.integer  "event_id"
@@ -56,6 +65,30 @@ ActiveRecord::Schema.define(version: 20170116175557) do
     t.index ["lng"], name: "index_events_on_lng", using: :btree
     t.index ["start_date"], name: "index_events_on_start_date", using: :btree
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
+  end
+
+  create_table "favorite_places", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "category_id"
+    t.string   "address"
+    t.string   "formatted_address"
+    t.float    "lat"
+    t.float    "lng"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["address"], name: "index_favorite_places_on_address", using: :btree
+    t.index ["category_id"], name: "index_favorite_places_on_category_id", using: :btree
+    t.index ["lat"], name: "index_favorite_places_on_lat", using: :btree
+    t.index ["title"], name: "index_favorite_places_on_title", using: :btree
+    t.index ["user_id"], name: "index_favorite_places_on_user_id", using: :btree
+  end
+
+  create_table "icons", force: :cascade do |t|
+    t.text     "url",        null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
