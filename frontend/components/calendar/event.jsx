@@ -14,6 +14,17 @@ class Event extends React.Component {
     this.props.router.push(`/events/${id}/edit`);
   }
 
+  renderDirectionsInformation () {
+    const { direction } = this.props.event;
+    if (!direction) return null;
+
+    return (
+      <div className="event-travel-time">
+        <span>Travel Time: { direction.durationText }</span>
+      </div>
+    );
+  }
+
   render () {
     const { event } = this.props;
     const startDate = moment(event.startDate).format('h:mma');
@@ -23,7 +34,7 @@ class Event extends React.Component {
     return (
       <li className="calendar-event">
         <div className="event-start-trip-message"></div>
-        <div className="event-travel-time"></div>
+        { this.renderDirectionsInformation() }
         <div className={ eventClass }
           onClick={ this.handleEditEvent }>
           <span className="event-title">{ event.title }</span>

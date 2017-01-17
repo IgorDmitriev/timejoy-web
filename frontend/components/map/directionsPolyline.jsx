@@ -27,7 +27,7 @@ class DirectionsPolyline extends React.Component {
     if (this.polyline) {
       this.polyline.setMap(null);
       this.borderPolyline.setMap(null);
-    };
+    }
   }
 
   renderPolyline () {
@@ -42,8 +42,9 @@ class DirectionsPolyline extends React.Component {
       strokeColor: '#64B5F6',
       strokeOpacity: 1,
       strokeWeight: 4,
+      fillColor: '#000',
       zIndex: 2
-    })
+    });
 
     this.borderPolyline = new google.maps.Polyline({
       path: decodedPolyline,
@@ -52,7 +53,7 @@ class DirectionsPolyline extends React.Component {
       strokeOpacity: 1,
       strokeWeight: 6,
       zIndex: 1
-    })
+    });
 
     this.polyline.setMap(map);
     this.borderPolyline.setMap(map);

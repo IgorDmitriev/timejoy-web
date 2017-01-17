@@ -12,6 +12,23 @@
       display: flex;
       flex-direction: column;
 
+      .event-travel-time {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: 30px;
+        background-color: $blue;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        box-shadow: 2px 2px 0px 0 rgb(12, 88, 44);
+
+        span {
+          font-size: 14px;
+          color: #fff;
+          text-shadow: 0 0 2px #666;
+        }
+      }
 
       .event-body {
         display: flex;
@@ -20,7 +37,8 @@
         // align-items: center;
         background-color: $green;
         color: white;
-        border-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
         padding: 10px 20px;
         // box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
         box-shadow: 2px 2px 0px 0 rgb(12, 88, 44);
@@ -55,6 +73,7 @@
     .calendar-event:hover {
       cursor: pointer;
     }
+
   }
 
   .calendar-events-list:after {
