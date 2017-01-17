@@ -21,7 +21,7 @@ class Api::EventsController < ApplicationController
 
     if @event.save
       start_date, end_date = @event.current_day
-      @events = get_events_by_date_range(start_date, end_date)
+      @events = get_events_by_date_range(start_date.utc, end_date.utc)
 
       render :events
     else
@@ -34,7 +34,7 @@ class Api::EventsController < ApplicationController
 
     if @event.destroy
       start_date, end_date = @event.current_day
-      @events = get_events_by_date_range(start_date, end_date)
+      @events = get_events_by_date_range(start_date.utc, end_date.utc)
 
       render :events
     else
@@ -53,7 +53,7 @@ class Api::EventsController < ApplicationController
       old_next_event.calculate_directions if old_next_event
 
       start_date, end_date = @event.current_day
-      @events = get_events_by_date_range(start_date, end_date)
+      @events = get_events_by_date_range(start_date.utc, end_date.utc)
 
       render :events
     else
