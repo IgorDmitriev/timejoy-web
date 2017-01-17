@@ -24,6 +24,8 @@ class User < ApplicationRecord
   validates :email, length: { minimum: 6 }
 
   has_many :events, dependent: :destroy
+  has_many :favorite_places, dependent: :destroy
+  has_many :categories
 
   attr_reader :password
 
