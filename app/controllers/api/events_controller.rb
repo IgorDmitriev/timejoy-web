@@ -44,10 +44,17 @@ class Api::EventsController < ApplicationController
 
   def update
     Time.zone = current_user.timezone
+    old_next_event = @event.next_event
+    p 'before update'
+    p old_next_event
     if @event.update(event_params)
+      p 'after update'
+      p old_next_event
+      old_next_event.calculate_directions if old_next_event
+
       start_date, end_date = @event.current_day
       @events = get_events_by_date_range(start_date, end_date)
-      
+
       render :events
     else
       render json: @event.errors.full_messages, status: 422

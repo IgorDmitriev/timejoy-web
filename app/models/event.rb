@@ -30,9 +30,10 @@ class Event < ApplicationRecord
   end
 
   before_create :ensure_updated_address
-  after_create :include_new_event_in_route, if: :formatted_address_present?
+  after_create :include_in_route, if: :formatted_address_present?
 
   before_update :update_address, if: :address_changed?
+  after_update :handle_update
 
   after_destroy :analyze_next_event, if: :formatted_address_present?
 
@@ -63,9 +64,18 @@ class Event < ApplicationRecord
     true
   end
 
+  def handle_update
+    # debugger
+    calculate_directions
+    next_event.calculate_directions
+  end
+
   def calculate_directions
     # TODO set initial location to home/work if user has home/work address
-    self.direction = nil && return unless previous_event
+    return self.direction = nil unless previous_event
+    return if direction &&
+      direction.start_address == previous_event.formatted_address &&
+      direction.end_address == formatted_address
 
     new_direction =
       Direction.new(
@@ -76,26 +86,13 @@ class Event < ApplicationRecord
     self.direction = new_direction.encoded_polyline ? new_direction : nil
   end
 
-  def include_new_event_in_route
+  def include_in_route
     calculate_directions
 
     # TODO set last location to home/work if user has home/work address
     return unless next_event
 
-    return if next_event.direction &&
-      next_event.direction.start_address == formatted_address
-
-    new_direction_for_next_event =
-      Direction.new(
-        start_address: formatted_address,
-        end_address: next_event.formatted_address
-      )
-
-    next_event.direction =
-      if new_direction_for_next_event.encoded_polyline
-        new_direction_for_next_event
-      end
-
+    next_event.calculate_directions
   end
 
   def previous_event
