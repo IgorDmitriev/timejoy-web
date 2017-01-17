@@ -18,7 +18,9 @@ CustomMarker.prototype.draw = function() {
     $(div).data('eventId', this.eventId);
 
     $(div).append(
-      `<div class="marker-title">${this.title}</div>
+      `<div class="marker-title">
+        <span>${this.title}</span>
+      </div>
       <div class="marker-bottom-arrow"></div>`
     );
 
