@@ -9,6 +9,9 @@ import { Router,
 import App from './app';
 import AuthFormContainer from './auth_form/auth_form_container';
 import EventForm from './event/event_form_container';
+import FavoritePlacesTab from './favorites/favoritePlacesTab';
+import FavoritePlaceIndex from './favorites/favoritePlacesIndex';
+import FavoritePlaceForm from './favorites/favoritePlaceForm';
 
 
 const Root = ({ store }) => {
@@ -37,10 +40,15 @@ const Root = ({ store }) => {
           onEnter={ _ensureLoggedIn }>
           <Route path="/new-event" component={ EventForm }/>
           <Route path="/events/:id/edit" component={ EventForm }/>
+          <Route path="/favorites" component={ FavoritePlacesTab }>
+            <IndexRoute component={ FavoritePlaceIndex } />
+
+          </Route>
         </Route>
       </Router>
     </Provider>
   );
 };
-
+// <Route path="/new" component={ FavoritePlaceForm } />
+// <Route path="/:id/edit" component={ FavoritePlaceForm } />
 export default Root;

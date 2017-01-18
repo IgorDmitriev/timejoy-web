@@ -57,6 +57,26 @@
   align-items: flex-start;
 }
 
+.favorite-places-tab {
+  animation: 0.3s slideRight ease;
+  position: absolute;
+  top: 0;
+  left: 345px;
+
+  z-index: 1;
+  width: 340px;
+  height: 100vh;
+  background-color: #fff;
+  box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.5);
+  flex-shrink: 1;
+  margin-left: 5px;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
 
 #map {
   flex-grow: 1;
