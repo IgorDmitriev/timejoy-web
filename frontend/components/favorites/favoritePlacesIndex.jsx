@@ -1,4 +1,5 @@
 import React from 'react';
+import FavoritePlacesListItem from './favoritePlacesListItem';
 
 class FavoritePlaceIndex extends React.Component {
   constructor (props) {
@@ -13,23 +14,26 @@ class FavoritePlaceIndex extends React.Component {
 
   renderListItems () {
     return (
-      <div>
-        <ul>
-          {
-            this.props.favoritePlaces.map(
-              (favoritePlace, idx) => (
-                <li key={idx}>{favoritePlace.title}</li>
-              )
-            )
-          }
-        </ul>
-      </div>
+      <ul className="favorite-places-list">
+        {
+          this.props.favoritePlaces.map(
+            (favoritePlace, idx) => (
+              <FavoritePlacesListItem
+                key={idx}
+                favoritePlace={favoritePlace}
+                 />
+             )
+          )
+        }
+      </ul>
     );
 
   }
 
   render () {
-    return <div>{this.renderListItems()}</div>;
+    return (<div className="favorite-places-index">
+      {this.renderListItems()}
+    </div>);
   }
 }
 

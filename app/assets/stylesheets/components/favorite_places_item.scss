@@ -1,0 +1,46 @@
+.favorite-places-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 5px 0;
+
+
+  .item-category-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    img {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .item-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    font-family: $Lato;
+
+    .item-title {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .item-address {
+      font-size: 10px;
+      color: #777;
+    }
+  }
+
+}
+
+.favorite-places-item:hover {
+  cursor: default;
+  background-color: $white;
+}

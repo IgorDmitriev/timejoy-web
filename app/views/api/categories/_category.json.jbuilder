@@ -2,4 +2,4 @@ json.extract! category,
               :id,
               :title
 
-json.icon_url category.icon.url
+json.iconUrl category.icon.url
