@@ -1,0 +1,2 @@
+module Api::FavoritePlacesHelper
+end
