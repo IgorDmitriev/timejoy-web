@@ -10,8 +10,8 @@ import App from './app';
 import AuthFormContainer from './auth_form/auth_form_container';
 import EventForm from './event/event_form_container';
 import FavoritePlacesTab from './favorites/favoritePlacesTab';
-import FavoritePlaceIndex from './favorites/favoritePlacesIndex';
-import FavoritePlaceForm from './favorites/favoritePlaceForm';
+import FavoritePlaceIndex from './favorites/favoritePlacesIndexContainer';
+import FavoritePlaceForm from './favorites/favoritePlaceFormContainer';
 
 
 const Root = ({ store }) => {

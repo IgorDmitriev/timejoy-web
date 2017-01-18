@@ -11,7 +11,7 @@ import merge from 'lodash/merge';
 
 const EventReducer = (state = {}, action) => {
   deepFreeze(state);
-  let newState = merge({}, state);
+  let newState = {...state};
 
   switch (action.type) {
     case RECEIVE_EVENTS:

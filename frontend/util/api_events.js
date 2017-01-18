@@ -22,7 +22,7 @@ export const createEvent = event => {
     url: 'api/events',
     data: { event }
   });
-}
+};
 
 
 export const updateEvent = event => (
