@@ -6,6 +6,7 @@ export const signup = user => (
   })
 );
 
+
 export const login = user => (
   $.ajax({
     method: 'POST',
@@ -18,5 +19,13 @@ export const logout = () => (
   $.ajax({
     method: 'DELETE',
     url: '/api/session'
+  })
+);
+
+export const updateSettings = settings => (
+  $.ajax({
+    method: 'PATCH',
+    url: `/api/users/${settings.userId}`,
+    data: { settings }
   })
 );

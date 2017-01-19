@@ -5,6 +5,8 @@ export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const RECEIVE_LOGOUT_SUCCESS = 'RECEIVE_LOGOUT_SUCCESS';
 export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 export const LOG_OUT = 'LOG_OUT';
+export const RECEIVE_USER_SETTINGS = 'RECEIVE_USER_SETTINGS';
+
 
 //regular actions
 
@@ -25,6 +27,7 @@ export const receiveErrors = errors => ({
 export const receiveLogout = () => ({
   type: LOG_OUT
 });
+
 
 //thunk actions
 
@@ -47,5 +50,12 @@ export const requestSignup = user => dispatch => {
     currentUser => dispatch(receiveCurrentUser(currentUser))
   ).fail(
     error => dispatch(receiveErrors(error.responseJSON))
+  );
+};
+
+
+export const updateUserSettings = settings => dispatch => {
+  return AuthAPIUtil.updateSettings(settings).then(
+    (currentUser) => dispatch(receiveCurrentUser(currentUser))
   );
 };
