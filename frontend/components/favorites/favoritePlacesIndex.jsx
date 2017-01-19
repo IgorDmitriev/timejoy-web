@@ -20,7 +20,8 @@ class FavoritePlaceIndex extends React.Component {
     this.props.fetchFavoritePlaces();
   }
 
-  handleClose () {
+  handleClose (e) {
+    e.preventDefault();
     this.props.closeTab();
     this.props.router.push('/');
   }

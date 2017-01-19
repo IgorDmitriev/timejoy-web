@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import FavoritePlacesItemForm from './FavoritePlacesItemForm';
 
 class FavoritePlacesListItem extends React.Component {
@@ -10,6 +11,7 @@ class FavoritePlacesListItem extends React.Component {
     };
 
     this.toggleEditMode = this.toggleEditMode.bind(this);
+    this.addToRoute = this.addToRoute.bind(this);
   }
 
   toggleEditMode () {
@@ -33,6 +35,26 @@ class FavoritePlacesListItem extends React.Component {
     );
   }
 
+  renderForm () {
+    return (
+      <li>
+        { this.renderErrors() }
+        <FavoritePlacesItemForm
+          formPostAction={ this.props.updateFavoritePlace }
+          favoritePlace={ this.props.favoritePlace }
+          clearErrors={ this.props.clearErrors }
+          onSave={ this.toggleEditMode }
+          onDelete={ this.props.deleteFavoritePlace }
+          />
+      </li>
+    );
+  }
+
+  addToRoute () {
+    const { title, address } = this.props.favoritePlace;
+    this.props.router.push(`/new-event?title=${title}&address=${address}`);
+  }
+
   render () {
     const {
       title, address, id,
@@ -42,18 +64,7 @@ class FavoritePlacesListItem extends React.Component {
     } = this.props.favoritePlace;
 
     if (this.state.editMode) {
-      return (
-        <li>
-          { this.renderErrors() }
-          <FavoritePlacesItemForm
-            formPostAction={ this.props.updateFavoritePlace }
-            favoritePlace={ this.props.favoritePlace }
-            clearErrors={ this.props.clearErrors }
-            onSave={ this.toggleEditMode }
-            onDelete={ this.props.deleteFavoritePlace }
-            />
-        </li>
-      );
+      return this.renderForm();
     }
 
     return (
@@ -69,6 +80,11 @@ class FavoritePlacesListItem extends React.Component {
             <span
               className='item-address'
               onClick={ this.toggleEditMode }>{address}</span>
+          </div>
+          <div
+            className='add-to-calendar-button'
+            onClick={ this.addToRoute }>
+            <button>Add to route</button>
           </div>
         </div>
       </li>
@@ -92,4 +108,4 @@ FavoritePlacesListItem.PropTypes = {
   })
 };
 
-export default FavoritePlacesListItem;
+export default withRouter(FavoritePlacesListItem);

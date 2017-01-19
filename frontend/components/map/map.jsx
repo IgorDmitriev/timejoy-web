@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import _ from 'lodash';
 
 import EventMarker from './eventMarker';
 import DirectionsPolyline from './directionsPolyline';
@@ -12,6 +13,7 @@ class Map extends React.Component {
     console.log(props);
     const { lat, lng } = this.props.mapOptions.center;
     this.defaultCenter = new google.maps.LatLng(lat, lng);
+
     this.state = {
       currentLocation: {
         lat,
@@ -33,7 +35,7 @@ class Map extends React.Component {
       this.map.setCenter(this.defaultCenter);
       this.map.setZoom(11);
     }
-    if (this.props.favoritePlaces.length !== 0) this.animatePanMap(this.map);
+    // if (this.props.favoritePlaces.length !== 0) this.animatePanMap(this.map);
     if (this.map.getZoom() > 15) this.map.setZoom(15);
   }
 
@@ -50,6 +52,7 @@ class Map extends React.Component {
     const node = ReactDOM.findDOMNode(mapRef);
 
     this.map = new maps.Map(node, this.props.mapOptions);
+    window.map = this.map;
 
     // TODO handle events on map
     // const eventsNames = ['click', 'dragend'];
@@ -89,7 +92,7 @@ class Map extends React.Component {
       );
     });
 
-    // if (map && events.length !== 0) map.fitBounds(bounds);
+    if (map && events.length !== 0) map.fitBounds(bounds);
 
     return eventsMarkers;
   }

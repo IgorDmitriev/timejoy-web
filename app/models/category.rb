@@ -11,8 +11,8 @@
 #
 
 class Category < ApplicationRecord
-  validates :user, :title, :icon, presence: true
+  validates :title, :icon, presence: true
 
   belongs_to :icon
-  belongs_to :user
+  # belongs_to :user
 end

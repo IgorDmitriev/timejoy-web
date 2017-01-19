@@ -16,6 +16,14 @@ const mapStateToProps = (state, ownProps) => {
     currentDate: state.currentDate
   };
 
+  if (ownProps.location.query.title &&
+      ownProps.location.query.address) {
+    props['event'] = {
+      title: ownProps.location.query.title,
+      address: ownProps.location.query.address
+    };
+  }
+
   if (ownProps.params.id) {
     const event = merge(
       {},
@@ -30,6 +38,8 @@ const mapStateToProps = (state, ownProps) => {
       props['formButtonName'] = 'UPDATE';
     }
   }
+
+
 
   return props;
 };

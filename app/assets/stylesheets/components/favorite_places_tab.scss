@@ -74,6 +74,8 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    height: 100vh;
+    overflow-y: scroll;
 
     > div {
       width: 100%;
@@ -114,5 +116,10 @@
         margin: 0px 0px;
       }
     }
+  }
+
+  .favorite-places-index::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
   }
 }
