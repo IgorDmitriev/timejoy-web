@@ -1,0 +1,125 @@
+.favorite-places-tab {
+  .navbar {
+    width: 340px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;;
+    align-items: center;
+    padding: 5px 20px;
+    position: relative;
+    background-color: $orange;
+
+    button {
+      font-family: $Lato;
+      padding: 5px 10px;
+      color: #fff;
+      font-weight: 300;
+      font-size: 12px;
+      background: none;
+    }
+
+    button:hover {
+      cursor: pointer;
+      background-color: $dark-green-opacity;
+      border-radius: 2px;
+    }
+
+    button:active {
+      box-shadow: inset 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    span {
+      display: block;
+      font-family: $Lato;
+      font-weight: 300;
+    }
+
+    .create-new {
+      margin-left: 30px;
+      width: 30px;
+      height: 30px;
+      font-size: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .create-new:hover {
+      cursor: pointer;
+      background-color: $dark-green-opacity;
+      border-radius: 2px;
+    }
+
+    .create-new:active {
+      box-shadow: inset 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .item-category-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    img {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .favorite-places-index {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100vh;
+    overflow-y: scroll;
+
+    > div {
+      width: 100%;
+    }
+
+    .errors {
+      ul {
+        list-style-type: none;
+      }
+
+      li {
+        margin: 10px 20px;
+        font-size: 12px;
+        color: $dark-red;
+      }
+    }
+
+    .new-favorite-place-open {
+      transition-duration: 0.2s;
+      height: 150px;
+      background-color: $lightest-orange;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .new-favorite-place-closed {
+      transition-duration: 0.1s;
+      background-color: #fff;
+      height: 0;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .favorite-places-list {
+      width: 100%;
+
+      li {
+        margin: 0px 0px;
+      }
+    }
+  }
+
+  .favorite-places-index::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+}

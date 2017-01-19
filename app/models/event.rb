@@ -67,7 +67,7 @@ class Event < ApplicationRecord
   def handle_update
     # debugger
     calculate_directions
-    next_event.calculate_directions
+    next_event.calculate_directions if next_event
   end
 
   def calculate_directions

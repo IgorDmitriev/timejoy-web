@@ -1,0 +1,38 @@
+# == Schema Information
+#
+# Table name: favorite_places
+#
+#  id                :integer          not null, primary key
+#  user_id           :integer
+#  title             :string
+#  description       :text
+#  category_id       :integer
+#  address           :string
+#  formatted_address :string
+#  lat               :float
+#  lng               :float
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  title: MyString
+  description: MyText
+  category_id: 1
+  address: MyString
+  formatted_address: MyString
+  lat: 1.5
+  lng: 1.5
+
+two:
+  user_id: 1
+  title: MyString
+  description: MyText
+  category_id: 1
+  address: MyString
+  formatted_address: MyString
+  lat: 1.5
+  lng: 1.5

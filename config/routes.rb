@@ -6,5 +6,8 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
 
     resources :events, only: [:index, :create, :show, :destroy, :update]
+    resources :favorite_places, only: [:index, :create, :show, :destroy, :update]
+    resources :categories, only: [:index, :create, :show, :destroy, :update]
+    resources :icons, only: [:index]
   end
 end
