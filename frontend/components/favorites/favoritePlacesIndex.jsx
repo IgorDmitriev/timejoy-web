@@ -1,6 +1,6 @@
 import React from 'react';
 import FavoritePlacesNavBar from './FavoritePlacesNavBarContainer';
-import FavoritePlacesListItem from './favoritePlacesListItemContainer';
+import FavoritePlacesListItem from './FavoritePlacesListItemContainer';
 import FavoritePlacesItemForm from './FavoritePlacesItemForm';
 
 class FavoritePlaceIndex extends React.Component {

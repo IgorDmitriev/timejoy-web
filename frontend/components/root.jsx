@@ -9,7 +9,7 @@ import { Router,
 import App from './app';
 import AuthFormContainer from './auth_form/auth_form_container';
 import EventForm from './event/event_form_container';
-import FavoritePlacesTab from './favorites/favoritePlacesTab';
+import FavoritePlacesTab from './favorites/FavoritePlacesTab';
 import FavoritePlaceIndex from './favorites/favoritePlacesIndexContainer';
 
 
