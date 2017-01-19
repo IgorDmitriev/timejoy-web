@@ -1,8 +1,36 @@
 import React from 'react';
+import FavoritePlacesItemForm from './FavoritePlacesItemForm';
 
 class FavoritePlacesListItem extends React.Component {
   constructor (props) {
     super(props);
+
+    this.state = {
+      editMode: false
+    };
+
+    this.toggleEditMode = this.toggleEditMode.bind(this);
+  }
+
+  toggleEditMode () {
+    this.props.clearErrors();
+    this.setState({
+      editMode: !this.state.editMode
+    });
+  }
+
+  renderErrors () {
+    return (
+      <div className="errors">
+        <ul>
+          {
+            this.props.errors.map( (error, idx) => (
+              <li key={ idx }>{ error }</li>
+            ))
+          }
+        </ul>
+      </div>
+    );
   }
 
   render () {
@@ -12,6 +40,22 @@ class FavoritePlacesListItem extends React.Component {
         iconUrl
       }
     } = this.props.favoritePlace;
+
+    if (this.state.editMode) {
+      return (
+        <li>
+          { this.renderErrors() }
+          <FavoritePlacesItemForm
+            formPostAction={ this.props.updateFavoritePlace }
+            favoritePlace={ this.props.favoritePlace }
+            clearErrors={ this.props.clearErrors }
+            onSave={ this.toggleEditMode }
+            onDelete={ this.props.deleteFavoritePlace }
+            />
+        </li>
+      );
+    }
+
     return (
       <li>
         <div className='favorite-places-item'>
@@ -19,8 +63,12 @@ class FavoritePlacesListItem extends React.Component {
             <img src={iconUrl} />
           </div>
           <div className='item-body'>
-            <span className='item-title'>{title}</span>
-            <span className='item-address'>{address}</span>
+            <span
+              className='item-title'
+              onClick={ this.toggleEditMode }>{title}</span>
+            <span
+              className='item-address'
+              onClick={ this.toggleEditMode }>{address}</span>
           </div>
         </div>
       </li>

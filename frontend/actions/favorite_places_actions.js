@@ -48,7 +48,7 @@ export const createFavoritePlace = favoritePlace => dispatch => (
 
 export const updateFavoritePlace = favoritePlace => dispatch => (
   FavoritePlacesAPIUtil.updateFavoritePlace(favoritePlace).then(
-    updFavoritePlace => dispatch(removeFavoritePlace(updFavoritePlace))
+    updFavoritePlace => dispatch(receiveFavoritePlace(updFavoritePlace))
   ).fail(
     error => dispatch(receiveFavoritePlaceFormErrors(error.responseJSON))
   )
@@ -56,7 +56,7 @@ export const updateFavoritePlace = favoritePlace => dispatch => (
 
 export const deleteFavoritePlace = id => dispatch => (
   FavoritePlacesAPIUtil.deleteFavoritePlace(id).then(
-    delFavoritePlace => dispatch(receiveFavoritePlace(delFavoritePlace))
+    delFavoritePlace => dispatch(removeFavoritePlace(delFavoritePlace))
   ).fail(
     error => dispatch(receiveFavoritePlaceFormErrors(error.responseJSON))
   )

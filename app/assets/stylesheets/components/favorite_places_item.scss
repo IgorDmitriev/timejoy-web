@@ -15,11 +15,13 @@
     font-family: $Lato;
 
     .item-title {
+      cursor: pointer;
       font-size: 14px;
       color: #555;
     }
 
     .item-address {
+      cursor: pointer;
       font-size: 10px;
       color: #777;
     }

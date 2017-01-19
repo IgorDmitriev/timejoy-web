@@ -62,6 +62,18 @@ class FavoritePlacesItemForm extends React.Component {
     });
   }
 
+  renderDeleteButton() {
+    if (!this.props.onDelete) return null;
+
+    return (
+      <button
+        className="delete-button"
+        onClick={ this.props.onDelete.bind(null, this.state.id) }>
+        DELETE
+      </button>
+    );
+  }
+
   render () {
     return (
       <form className="favorite-places-item-form">
@@ -89,7 +101,9 @@ class FavoritePlacesItemForm extends React.Component {
         </div>
         </div>
         <div className="submit-button">
+          <button onClick={ this.props.onSave }>CLOSE</button>
           <button onClick={ this.handleSubmit }>SAVE</button>
+          { this.renderDeleteButton() }
         </div>
       </form>
     );
