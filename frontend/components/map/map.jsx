@@ -4,12 +4,14 @@ import ReactDOM from 'react-dom';
 import EventMarker from './eventMarker';
 import DirectionsPolyline from './directionsPolyline';
 import DirectionsMarker from './directionsMarker';
+import FavoritePlaceMarker from './FavoritePlaceMarker';
 
 class Map extends React.Component {
   constructor (props) {
     super (props);
     console.log(props);
     const { lat, lng } = this.props.mapOptions.center;
+    this.defaultCenter = new google.maps.LatLng(lat, lng);
     this.state = {
       currentLocation: {
         lat,
@@ -26,7 +28,19 @@ class Map extends React.Component {
 
   componentDidUpdate () {
     if (!this.map && google) this.loadMap();
+    if (this.map && this.bounds) this.map.fitBounds(this.bounds);
+    if (this.props.events.length === 0) {
+      this.map.setCenter(this.defaultCenter);
+      this.map.setZoom(11);
+    }
+    if (this.props.favoritePlaces.length !== 0) this.animatePanMap(this.map);
     if (this.map.getZoom() > 15) this.map.setZoom(15);
+  }
+
+  animatePanMap (map) {
+    for (let i = 0; i < 17; i++) {
+      setTimeout(() => map.panBy(-10, 0), i*10);
+    }
   }
 
   loadMap () {
@@ -59,7 +73,7 @@ class Map extends React.Component {
   renderEventsMarkers () {
     const { events } = this.props,
           map = this.map,
-          bounds = new google.maps.LatLngBounds();
+          bounds = this.bounds = new google.maps.LatLngBounds();
 
     const eventsMarkers = events.map( (event, idx) => {
       const { lat, lng } = event,
@@ -75,9 +89,32 @@ class Map extends React.Component {
       );
     });
 
-    if (map && events.length !== 0) map.fitBounds(bounds);
+    // if (map && events.length !== 0) map.fitBounds(bounds);
 
     return eventsMarkers;
+  }
+
+  renderFavoritePlaceMarkers () {
+    const { favoritePlaces } = this.props,
+          map = this.map,
+          bounds = this.bounds;
+
+    const favoritePlacesMarkers = favoritePlaces.map(
+      (favoritePlace, idx) => {
+        const { lat, lng } = favoritePlace,
+              markerPos = new google.maps.LatLng(lat, lng);
+
+        return (
+          <FavoritePlaceMarker
+            key={ idx }
+            map={ map }
+            favoritePlace={ favoritePlace }
+          />
+        );
+      }
+    );
+
+    return favoritePlacesMarkers;
   }
 
   renderAllDirections () {
@@ -106,6 +143,7 @@ class Map extends React.Component {
     return (
       <div ref='map' id='map'>
         { this.renderEventsMarkers() }
+        { this.renderFavoritePlaceMarkers() }
         { this.renderAllDirections() }
       </div>
     );

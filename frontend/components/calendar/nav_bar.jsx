@@ -16,6 +16,7 @@ class NavBar extends React.Component {
     this.handleMenuToggle = this.handleMenuToggle.bind(this);
     this.handleMenuAutoClose = this.handleMenuAutoClose.bind(this);
     this.handleAddEvent = this.handleAddEvent.bind(this);
+    this.handleOpenFavorites = this.handleOpenFavorites.bind(this);
   }
 
   componentDidUpdate () {
@@ -26,6 +27,10 @@ class NavBar extends React.Component {
 
   handleAddEvent () {
     this.props.router.push('/new-event');
+  }
+
+  handleOpenFavorites () {
+    this.props.router.push('/favorites');
   }
 
   handleMenuToggle () {
@@ -58,6 +63,8 @@ class NavBar extends React.Component {
           <div className={ menuIconClass }
             onClick={this.handleMenuToggle}></div>
           <CalendarDateController />
+          <div className="create-new fa fa-star"
+            onClick={ this.handleOpenFavorites }></div>
           <div className="create-new fa fa-plus"
             onClick={ this.handleAddEvent }></div>
         </div>

@@ -1,14 +1,21 @@
 import React from 'react';
+import FavoritePlacesNavBar from './FavoritePlacesNavBarContainer';
 
-const FavoritePlacesTab = ({ children, router }) => (
-  <div className="favorite-places-tab">
-    <div className="navbar">
-      <button onClick={router.push.bind(null, '')}>CLOSE</button>
-      <span>Favorite Places</span>
-      <div className="create-new fa fa-plus"></div>
-    </div>
-    { children }
-  </div>
-);
+
+class FavoritePlacesTab extends React.Component {
+  constructor (props) {
+    super(props);
+  }
+
+  render () {
+    const { children, router } = this.props;
+    return (
+      <div className="favorite-places-tab">
+        <FavoritePlacesNavBar />
+        { children }
+      </div>
+    );
+  }
+}
 
 export default FavoritePlacesTab;

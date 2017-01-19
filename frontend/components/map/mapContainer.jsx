@@ -14,9 +14,12 @@ const mapStateToProps = state => {
     if (event.direction) allDirections.push(event.direction);
   });
 
+  const favoritePlaces = _.values(state.favoritePlaces);
+
   return ({
     events: eventsWithLocation,
-    allDirections
+    allDirections,
+    favoritePlaces
   });
 };
 
