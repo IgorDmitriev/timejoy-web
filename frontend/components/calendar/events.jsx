@@ -1,5 +1,6 @@
 import React from 'react';
 import Event from './event';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Events extends React.Component {
   constructor (props) {
@@ -34,11 +35,18 @@ class Events extends React.Component {
     return (
       <div>
         <ul className="calendar-events-list">
+          <ReactCSSTransitionGroup
+            transitionName="events"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={100}>
           {
             this.props.events.map( (event, idx) => (
               <Event key={idx} event={event} />
             ))
           }
+          </ReactCSSTransitionGroup>
         </ul>
       </div>
     );

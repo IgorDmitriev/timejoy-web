@@ -74,6 +74,33 @@
       cursor: pointer;
     }
 
+    .events-appear {
+      opacity: 0.01;
+    }
+
+    .events-appear.events-appear-active {
+      opacity: 1;
+      transition: opacity .5s ease-in;
+    }
+
+    .events-enter {
+      opacity: 0.01;
+    }
+
+    .events-enter.events-enter-active {
+      opacity: 1;
+      transition: opacity 500ms ease-in;
+    }
+
+    .events-leave {
+      opacity: 1;
+    }
+
+    .events-leave.events-leave-active {
+      opacity: 0.01;
+      transition: opacity 100ms ease-in;
+    }
+
   }
 
   .calendar-events-list:after {
