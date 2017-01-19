@@ -11,7 +11,6 @@ class FavoritePlacesTab extends React.Component {
     const { children, router } = this.props;
     return (
       <div className="favorite-places-tab">
-        <FavoritePlacesNavBar />
         { children }
       </div>
     );

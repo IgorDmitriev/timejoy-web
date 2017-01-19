@@ -52,7 +52,7 @@ class Api::FavoritePlacesController < ApplicationController
       params[:favoritePlace][:formattedAddress]
     favorite_place[:lat] = params[:favoritePlace][:lat]
     favorite_place[:lng] = params[:favoritePlace][:lng]
-    favorite_place[:category_id] = params[:favoritePlace][:categoryId]
+    favorite_place[:category_id] = params[:favoritePlace][:category][:id]
 
     favorite_place
   end
