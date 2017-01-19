@@ -189,6 +189,17 @@ class FavoritePlacesItemForm extends React.Component {
     );
   }
 
+  renderButtons () {
+    if (this.state.selectCategory) return null;
+    return (
+      <div className="submit-button">
+        <button onClick={ this.handleClose }>CLOSE</button>
+        <button onClick={ this.handleSubmit }>SAVE</button>
+        { this.renderDeleteButton() }
+      </div>
+    );
+  }
+
   render () {
     return (
       <form className="favorite-places-item-form">
@@ -201,11 +212,7 @@ class FavoritePlacesItemForm extends React.Component {
           { this.renderCategories() }
           { this.renderFormBody() }
         </div>
-        <div className="submit-button">
-          <button onClick={ this.handleClose }>CLOSE</button>
-          <button onClick={ this.handleSubmit }>SAVE</button>
-          { this.renderDeleteButton() }
-        </div>
+        { this.renderButtons() }
       </form>
     );
   }
