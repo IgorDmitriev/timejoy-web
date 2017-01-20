@@ -36,8 +36,12 @@ class EventMarker extends React.Component {
       title,
       position,
       map,
-      styleClass: 'event-marker'
+      styleClass: 'event-marker',
+      onHover: this.props.onHover,
+      onClick: this.props.onClick
     });
+    const div = this.marker.div_;
+
   }
 
   render () {

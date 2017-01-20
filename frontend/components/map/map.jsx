@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { withRouter } from 'react-router';
 import _ from 'lodash';
 
 import EventMarker from './eventMarker';
@@ -10,7 +11,7 @@ import FavoritePlaceMarker from './FavoritePlaceMarker';
 class Map extends React.Component {
   constructor (props) {
     super (props);
-    
+
     const { lat, lng } = this.props.mapOptions.center;
     this.defaultCenter = new google.maps.LatLng(lat, lng);
 
@@ -21,7 +22,7 @@ class Map extends React.Component {
       }
     };
 
-    // this.handleEvent = this.handleEvent.bind(this);
+    this.handleEventMarkerClick = this.handleEventMarkerClick.bind(this);
   }
 
   componentDidMount () {
@@ -45,6 +46,10 @@ class Map extends React.Component {
     }
   }
 
+  handleEventMarkerClick (marker) {
+    this.props.router.push(`/events/${marker.eventId}/edit`);
+  }
+
   loadMap () {
     const maps = google.maps;
 
@@ -52,7 +57,10 @@ class Map extends React.Component {
     const node = ReactDOM.findDOMNode(mapRef);
 
     this.map = new maps.Map(node, this.props.mapOptions);
-    window.map = this.map;
+    this.props.setMap(this.map);
+    this.map.addListener('clickEvent', marker => {
+      console.log(marker);
+    });
 
     // TODO handle events on map
     // const eventsNames = ['click', 'dragend'];
@@ -90,6 +98,8 @@ class Map extends React.Component {
           key={ idx }
           map={ map }
           event={ event }
+          onHover={ this.props.hoverEvent.bind(null, event.id)}
+          onClick={ this.handleEventMarkerClick }
           />
       );
     });
@@ -350,7 +360,7 @@ Map.defaultProps = {
   }
 };
 
-export default Map;
+export default withRouter(Map);
 
 const camelize = str => {
   return str.split(' ').map(function(word){

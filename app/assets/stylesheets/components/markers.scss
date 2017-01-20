@@ -32,6 +32,7 @@
 }
 
 .directions-marker {
+  z-index: 75;
   .marker-title {
     background-color: $blue;
   }
@@ -42,6 +43,7 @@
 }
 
 .event-marker {
+  z-index: 100;
   .marker-title {
     background-color: $green;
   }
@@ -51,7 +53,12 @@
   }
 }
 
+.event-marker:hover {
+  transform: scale(1.1);
+}
+
 .favorite-place-marker {
+  z-index: 50;
   .marker-title {
     background-color: $orange;
   }

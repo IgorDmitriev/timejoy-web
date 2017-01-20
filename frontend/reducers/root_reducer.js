@@ -4,11 +4,13 @@ import events from './event_reducer';
 import currentDate from './calendar_date_controller_reducer';
 import errors from './errors_reducer';
 import favoritePlaces from './favoritePlaceReducer';
+import mapState from './MapReducer';
 
 export default combineReducers({
   session,
   events,
   currentDate,
   errors,
-  favoritePlaces
+  favoritePlaces,
+  mapState
 });

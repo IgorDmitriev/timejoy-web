@@ -1,6 +1,11 @@
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
+import {
+  setMap,
+  hoverEvent,
+  hoverFavoritePlace } from '../../actions/mapActions';
+
 import Map from './map';
 
 const mapStateToProps = state => {
@@ -37,7 +42,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-
+  setMap: map => dispatch(setMap(map)),
+  hoverEvent: eventId => dispatch(hoverEvent(eventId)),
+  hoverFavoritePlace: favoritePlaceId =>
+    dispatch(hoverFavoritePlace(favoritePlaceId))
 });
 
 export default connect(
