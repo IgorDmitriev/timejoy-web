@@ -1,0 +1,121 @@
+.user-settings {
+  background-color: $green;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: $white;
+  font-family: $Lato;
+  font-weight: 300;
+  padding: 10px 20px 10px 20px;
+
+  label {
+    display: block;
+    font-family: $Lato;
+    font-size: 12px;
+    font-weight: 300;
+  }
+
+  > div {
+    margin: 5px 0;
+  }
+
+  .email {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;;
+
+    span {
+      margin-left: 70px;
+      display: block;
+      font-family: $Lato;
+      font-weight: 300;
+    }
+  }
+
+  .home-address {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+
+    input {
+      margin-left: 20px;
+      height: 20px;
+      font-size: 16px;
+      font-family: $Lato;
+      background-color: transparent;
+      color: $white;
+      font-weight: 300;
+    }
+
+    input::-webkit-input-placeholder {
+      color: $white;
+      font-family: $Lato;
+
+    }
+  }
+
+  .travel-mode {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 10px;
+
+      img {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+
+      label {
+        cursor: pointer;
+      }
+    }
+
+    div:hover {
+      cursor: pointer;
+      border-radius: 2px;
+      background-color: $dark-green-opacity;
+    }
+
+    .selected {
+      background-color: $dark-green-opacity;
+    }
+  }
+
+  .submit-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+      button {
+        font-family: $Lato;
+        padding: 10px 30px;
+        color: #fff;
+        font-weight: 300;
+        font-size: 14px;
+        background: none;
+      }
+
+      button:hover {
+        cursor: pointer;
+        background-color: $dark-green-opacity;
+        border-radius: 5px;
+      }
+
+      button:active {
+        box-shadow: inset 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+      }
+  }
+}

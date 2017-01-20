@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 
 import CalendarDateController from './calendar_date_controller_container';
+import UserSettings from './UserSettingsContainer';
 
 class NavBar extends React.Component {
   constructor (props) {
@@ -10,13 +11,15 @@ class NavBar extends React.Component {
     this.logout = this.logout.bind(this);
 
     this.state = {
-      menuToggled: false
+      menuToggled: false,
+      settingsToggled: false
     };
 
     this.handleMenuToggle = this.handleMenuToggle.bind(this);
     this.handleMenuAutoClose = this.handleMenuAutoClose.bind(this);
     this.handleAddEvent = this.handleAddEvent.bind(this);
     this.handleOpenFavorites = this.handleOpenFavorites.bind(this);
+    this.handleSettingsToggle = this.handleSettingsToggle.bind(this);
   }
 
   componentDidUpdate () {
@@ -35,21 +38,37 @@ class NavBar extends React.Component {
 
   handleMenuToggle () {
     this.setState({
-      menuToggled: !this.state.menuToggled
+      menuToggled: !this.state.menuToggled,
+      settingsToggled: false
+    });
+  }
+
+  handleSettingsToggle () {
+    this.setState({
+      settingsToggled: !this.state.settingsToggled
     });
   }
 
   handleMenuAutoClose () {
-    if (this.state.menuToggled) {
-      this.setState({
-        menuToggled: false
-      });
-    }
+    // TODO temp
+    // if (this.state.menuToggled) {
+    //   this.setState({
+    //     menuToggled: false
+    //   });
+    // }
   }
 
   logout (e) {
     e.preventDefault();
     this.props.requestLogout();
+  }
+
+  renderSettings () {
+    if (!this.state.settingsToggled) return null;
+
+    return (
+      <UserSettings onSave={ this.handleMenuToggle }/>
+    );
   }
 
   render () {
@@ -69,11 +88,14 @@ class NavBar extends React.Component {
             onClick={ this.handleAddEvent }></div>
         </div>
         <div className={ menuClass }>
-          <button className="menu-settings-option">Settings</button>
+          <button
+            className="menu-settings-option"
+            onClick={ this.handleSettingsToggle }>Settings</button>
           <button className="menu-settings-logout"
             onClick={this.logout}>Log Out</button>
         </div>
         <div className="messages"></div>
+        { this.renderSettings() }
       </div>
     );
   }

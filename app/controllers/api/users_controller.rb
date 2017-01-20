@@ -27,7 +27,13 @@ class Api::UsersController < ApplicationController
   end
 
   def settings_params
-    params.require(:settings).permit(
-      :home_address, :home_lat, :home_lng, :default_travel_mode)
+    settings = {}
+
+    settings[:home_address] = params[:settings][:homeAddress]
+    settings[:home_lat] = params[:settings][:homeLat]
+    settings[:home_lng] = params[:settings][:homeLng]
+    settings[:default_travel_mode] = params[:settings][:defaultTravelMode]
+
+    settings
   end
 end

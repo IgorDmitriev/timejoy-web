@@ -25,7 +25,7 @@ export const logout = () => (
 export const updateSettings = settings => (
   $.ajax({
     method: 'PATCH',
-    url: `/api/users/${settings.userId}`,
+    url: `/api/users/${settings.id}`,
     data: { settings }
   })
 );
