@@ -31,7 +31,7 @@ class Map extends React.Component {
 
   componentDidUpdate () {
     if (!this.map && google) this.loadMap();
-    if (this.map && this.bounds) this.map.fitBounds(this.bounds);
+    // if (this.map && this.bounds) this.map.fitBounds(this.bounds);
     if (this.props.events.length === 0) {
       this.map.setCenter(this.defaultCenter);
       this.map.setZoom(11);

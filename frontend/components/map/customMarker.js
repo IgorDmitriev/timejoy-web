@@ -32,13 +32,13 @@ CustomMarker.prototype.draw = function() {
     const panes = this.getPanes();
     panes.overlayMouseTarget.appendChild(div);
 
-    google.maps.event.addDomListener(div, "mouseover", () => {
-      if (me.onHoverIn) me.onHoverIn(me);
-    });
-
-    google.maps.event.addDomListener(div, "mouseout", () => {
-      if (me.onHoverOut) me.onHoverOut(me);
-    });
+    // google.maps.event.addDomListener(div, "mouseover", () => {
+    //   if (me.onHoverIn) me.onHoverIn(me);
+    // });
+    //
+    // google.maps.event.addDomListener(div, "mouseout", () => {
+    //   if (me.onHoverOut) me.onHoverOut(me);
+    // });
 
     google.maps.event.addDomListener(div, "click", () => {
       if (me.onClick) me.onClick(me);

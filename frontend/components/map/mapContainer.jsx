@@ -38,8 +38,7 @@ const mapStateToProps = state => {
   return ({
     events: eventsWithLocation,
     allDirections,
-    favoritePlaces,
-    hoveredEventId: state.mapState.hoveredEvent
+    favoritePlaces
   });
 };
 
