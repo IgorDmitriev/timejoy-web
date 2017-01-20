@@ -10,7 +10,7 @@ import FavoritePlaceMarker from './FavoritePlaceMarker';
 class Map extends React.Component {
   constructor (props) {
     super (props);
-    console.log(props);
+    
     const { lat, lng } = this.props.mapOptions.center;
     this.defaultCenter = new google.maps.LatLng(lat, lng);
 
@@ -74,6 +74,8 @@ class Map extends React.Component {
   // }
 
   renderEventsMarkers () {
+    if (!this.map) return null;
+
     const { events } = this.props,
           map = this.map,
           bounds = this.bounds = new google.maps.LatLngBounds();
@@ -98,6 +100,8 @@ class Map extends React.Component {
   }
 
   renderFavoritePlaceMarkers () {
+    if (!this.map) return null;
+
     const { favoritePlaces } = this.props,
           map = this.map,
           bounds = this.bounds;
@@ -121,6 +125,8 @@ class Map extends React.Component {
   }
 
   renderAllDirections () {
+    if (!this.map) return null;
+
     const { allDirections } = this.props,
           map = this.map;
 

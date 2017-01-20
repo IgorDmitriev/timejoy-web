@@ -16,6 +16,19 @@ const mapStateToProps = state => {
 
   const favoritePlaces = _.values(state.favoritePlaces);
 
+  const { homeAddress, homeLat, homeLng } = state.session.currentUser;
+  if (homeAddress) {
+    const homeEvent = {
+      id: 0,
+      address: homeAddress,
+      formatted_address: homeAddress,
+      lat: homeLat,
+      lng: homeLng,
+      title: 'Home'
+    };
+    eventsWithLocation.push(homeEvent);
+  }
+
   return ({
     events: eventsWithLocation,
     allDirections,

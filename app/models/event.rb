@@ -71,15 +71,22 @@ class Event < ApplicationRecord
   end
 
   def calculate_directions
-    # TODO set initial location to home/work if user has home/work address
-    return self.direction = nil unless previous_event
+    return self.direction = nil if previous_event.nil? && user.home_address.nil?
+
+    previous_event_address =
+      if previous_event
+        previous_event.formatted_address
+      else
+        user.home_address
+      end
+
     return if direction &&
-      direction.start_address == previous_event.formatted_address &&
+      direction.start_address == previous_event_address &&
       direction.end_address == formatted_address
 
     new_direction =
       Direction.new(
-        start_address: previous_event.formatted_address,
+        start_address: previous_event_address,
         end_address: formatted_address
       )
 
@@ -103,6 +110,7 @@ class Event < ApplicationRecord
         .where.not(formatted_address: nil)
         .sort_by(&:start_date)
         .last
+
   end
 
   def next_event
