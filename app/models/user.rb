@@ -31,6 +31,7 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
   after_update :recalculate_future_calendar_events, if: :home_address_changed?
+  after_update :recalculate_future_calendar_events, if: :default_travel_mode_changed?
 
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)

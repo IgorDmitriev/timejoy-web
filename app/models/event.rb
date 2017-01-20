@@ -82,12 +82,14 @@ class Event < ApplicationRecord
 
     return if direction &&
       direction.start_address == previous_event_address &&
-      direction.end_address == formatted_address
+      direction.end_address == formatted_address &&
+      direction.travel_mode == user.default_travel_mode
 
     new_direction =
       Direction.new(
         start_address: previous_event_address,
-        end_address: formatted_address
+        end_address: formatted_address,
+        travel_mode: user.default_travel_mode
       )
 
     self.direction = new_direction.encoded_polyline ? new_direction : nil
