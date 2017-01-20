@@ -5,6 +5,7 @@ import currentDate from './calendar_date_controller_reducer';
 import errors from './errors_reducer';
 import favoritePlaces from './favoritePlaceReducer';
 import mapState from './MapReducer';
+import status from './StatusReducer';
 
 export default combineReducers({
   session,
@@ -12,5 +13,6 @@ export default combineReducers({
   currentDate,
   errors,
   favoritePlaces,
-  mapState
+  mapState,
+  status
 });

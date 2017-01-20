@@ -12,7 +12,8 @@ class Events extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.currentDate !== prevProps.currentDate) {
+    if (this.props.currentDate !== prevProps.currentDate ||
+        this.props.requestedUpdate) {
       this.fetchEvents.bind(this)();
     }
   }

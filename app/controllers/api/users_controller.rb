@@ -11,8 +11,9 @@ class Api::UsersController < ApplicationController
   end
 
   def update
+    Time.zone = current_user.timezone
     @user = current_user
-
+    
     if @user.update(settings_params)
       render :show
     else

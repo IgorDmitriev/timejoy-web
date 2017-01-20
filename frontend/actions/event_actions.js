@@ -1,5 +1,6 @@
 import * as EventAPIUtil from '../util/api_events';
 import { receiveEventFormErrors } from './errors_actions';
+import { requestUpdate } from './statusActions';
 //consts
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS';
 export const RECEIVE_EVENT = 'RECEIVE_EVENT';
@@ -22,11 +23,15 @@ export const removeEvent = event => ({
   event
 });
 
+
+
 // thunk action creators
 
 export const fetchEvents = (startDate, endDate) => dispatch => (
   EventAPIUtil.fetchEvents(startDate, endDate).then(
     events => dispatch(receiveEvents(events))
+  ).then(
+    () => dispatch(requestUpdate(false))
   )
 );
 

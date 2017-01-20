@@ -1,4 +1,5 @@
 import * as AuthAPIUtil from '../util/api_auth';
+import { requestUpdate } from './statusActions';
 
 //consts
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
@@ -28,7 +29,6 @@ export const receiveLogout = () => ({
   type: LOG_OUT
 });
 
-
 //thunk actions
 
 export const requestLogin = user => dispatch => {
@@ -53,9 +53,10 @@ export const requestSignup = user => dispatch => {
   );
 };
 
-
 export const updateUserSettings = settings => dispatch => {
   return AuthAPIUtil.updateSettings(settings).then(
     (currentUser) => dispatch(receiveCurrentUser(currentUser))
+  ).then(
+    () => dispatch(requestUpdate(true))
   );
 };

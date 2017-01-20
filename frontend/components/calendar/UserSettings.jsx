@@ -41,7 +41,9 @@ class UserSettings extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault();
-    this.props.update(this.state).then(this.props.onSave);
+    this.props.update(this.state)
+      .then(this.props.onSave)
+      .then(this.props.requestUpdate);
   }
 
   handleInput (field) {

@@ -30,10 +30,16 @@ class User < ApplicationRecord
   attr_reader :password
 
   after_initialize :ensure_session_token
+  after_update :recalculate_future_calendar_events, if: :home_address_changed?
 
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)
     user && user.is_password?(password) ? user : nil
+  end
+
+  def recalculate_future_calendar_events
+    future_calendar_events = events.where('start_date > ?', DateTime.now)
+    future_calendar_events.each(&:calculate_directions)
   end
 
   def password=(password)

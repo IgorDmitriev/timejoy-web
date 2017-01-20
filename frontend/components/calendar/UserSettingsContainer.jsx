@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { updateUserSettings } from '../../actions/auth_actions';
+import { requestUpdate } from '../../actions/statusActions';
 
 import UserSettings from './UserSettings';
 
@@ -8,7 +9,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  update: settings => dispatch(updateUserSettings(settings))
+  update: settings => dispatch(updateUserSettings(settings)),
+  requestUpdate: () => dispatch(requestUpdate(true))
 });
 
 export default connect(
