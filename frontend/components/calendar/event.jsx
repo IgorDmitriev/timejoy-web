@@ -44,7 +44,9 @@ class Event extends React.Component {
     const { event } = this.props;
     const startDate = moment(event.startDate).format('h:mma');
     const endDate = moment(event.endDate).format('h:mma');
-    const eventClass = event.formatted_address ? 'event-body' : 'event-body grey';
+    let eventClass = 'event-body';
+    if (!event.formatted_address) eventClass = eventClass.concat(' grey');
+    if (event.hovered) eventClass = eventClass.concat(' hovered');
 
     return (
       <li className="calendar-event">

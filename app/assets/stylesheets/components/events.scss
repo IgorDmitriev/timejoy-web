@@ -31,6 +31,8 @@
       }
 
       .event-body {
+        transition-duration: 0.2s;
+        transition-timing-function: ease-out;
         cursor: pointer;
         display: flex;
         flex-direction: column;
@@ -69,6 +71,19 @@
         background-color: rgba(102, 102, 102, 0.5);
         margin-left: 50px;
       }
+
+      .event-body.hovered {
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in;
+        transform: scale(1.05);
+      }
+
+      .event-body:hover {
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in;
+        transform: scale(1.05);
+      }
+
     }
 
     .event-start-trip-message {

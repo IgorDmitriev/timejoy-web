@@ -43,7 +43,10 @@ class Events extends React.Component {
             transitionLeaveTimeout={100}>
           {
             this.props.events.map( (event, idx) => (
-              <Event key={idx} event={event} />
+              <Event
+                key={idx}
+                event={event}
+                hoveredEventId={this.props.hoveredEventId} />
             ))
           }
           </ReactCSSTransitionGroup>

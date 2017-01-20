@@ -3,7 +3,8 @@ import _ from 'lodash';
 
 import {
   setMap,
-  hoverEvent,
+  hoverEventIn,
+  hoverEventOut,
   hoverFavoritePlace } from '../../actions/mapActions';
 
 import Map from './map';
@@ -37,13 +38,15 @@ const mapStateToProps = state => {
   return ({
     events: eventsWithLocation,
     allDirections,
-    favoritePlaces
+    favoritePlaces,
+    hoveredEventId: state.mapState.hoveredEvent
   });
 };
 
 const mapDispatchToProps = dispatch => ({
   setMap: map => dispatch(setMap(map)),
-  hoverEvent: eventId => dispatch(hoverEvent(eventId)),
+  hoverEventIn: eventId => dispatch(hoverEventIn(eventId)),
+  hoverEventOut: eventId => dispatch(hoverEventOut(eventId)),
   hoverFavoritePlace: favoritePlaceId =>
     dispatch(hoverFavoritePlace(favoritePlaceId))
 });

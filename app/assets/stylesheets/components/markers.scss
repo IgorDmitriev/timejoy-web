@@ -31,6 +31,10 @@
   }
 }
 
+.custom-marker * {
+  pointer-events: none;
+}
+
 .directions-marker {
   z-index: 75;
   .marker-title {
@@ -43,6 +47,8 @@
 }
 
 .event-marker {
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
   z-index: 100;
   .marker-title {
     background-color: $green;
@@ -54,6 +60,8 @@
 }
 
 .event-marker:hover {
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
   transform: scale(1.1);
 }
 

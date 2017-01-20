@@ -58,9 +58,7 @@ class Map extends React.Component {
 
     this.map = new maps.Map(node, this.props.mapOptions);
     this.props.setMap(this.map);
-    this.map.addListener('clickEvent', marker => {
-      console.log(marker);
-    });
+
 
     // TODO handle events on map
     // const eventsNames = ['click', 'dragend'];
@@ -81,6 +79,21 @@ class Map extends React.Component {
   //   };
   // }
 
+  handleEventHoverIn (eventId) {
+    if (eventId === 0) return null;
+    if (this.props.hoveredEventId !== eventId) {
+      this.props.hoverEventIn(eventId);
+    }
+  }
+
+  handleEventHoverOut (eventId) {
+    console.log('out2');
+    if (eventId === 0) return null;
+    if (this.props.hoveredEventId === eventId) {
+      this.props.hoverEventOut(eventId);
+    }
+  }
+
   renderEventsMarkers () {
     if (!this.map) return null;
 
@@ -98,7 +111,8 @@ class Map extends React.Component {
           key={ idx }
           map={ map }
           event={ event }
-          onHover={ this.props.hoverEvent.bind(null, event.id)}
+          onHoverIn={ this.handleEventHoverIn.bind(this, event.id) }
+          onHoverOut={ this.handleEventHoverOut.bind(this, event.id) }
           onClick={ this.handleEventMarkerClick }
           />
       );

@@ -37,7 +37,8 @@ class EventMarker extends React.Component {
       position,
       map,
       styleClass: 'event-marker',
-      onHover: this.props.onHover,
+      onHoverIn: this.props.onHoverIn,
+      onHoverOut: this.props.onHoverOut,
       onClick: this.props.onClick
     });
     const div = this.marker.div_;

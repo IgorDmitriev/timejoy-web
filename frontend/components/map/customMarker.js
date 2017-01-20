@@ -1,10 +1,11 @@
-function CustomMarker({id, title, position, map, styleClass, onHover, onClick}) {
+function CustomMarker({id, title, position, map, styleClass, onHoverIn, onHoverOut, onClick}) {
   this.eventId = id;
   this.title = title;
   this.position_ = position;
   this.styleClass = styleClass;
   this.map = map;
-  this.onHover = onHover;
+  this.onHoverIn = onHoverIn;
+  this.onHoverOut = onHoverOut;
   this.onClick = onClick;
   this.setMap(map);
 }
@@ -32,7 +33,11 @@ CustomMarker.prototype.draw = function() {
     panes.overlayMouseTarget.appendChild(div);
 
     google.maps.event.addDomListener(div, "mouseover", () => {
-      if (me.onHover) me.onHover(me);
+      if (me.onHoverIn) me.onHoverIn(me);
+    });
+
+    google.maps.event.addDomListener(div, "mouseout", () => {
+      if (me.onHoverOut) me.onHoverOut(me);
     });
 
     google.maps.event.addDomListener(div, "click", () => {
