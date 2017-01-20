@@ -25,6 +25,21 @@ class Event extends React.Component {
     );
   }
 
+  renderStartTripMessage () {
+    const { direction } = this.props.event;
+    const { event } = this.props;
+    if (!direction) return null;
+
+    const leaveTime = moment(event.startDate).clone().subtract(direction.durationValue, 'seconds').format('h:mma');
+
+    return (
+      <div className="event-start-trip-message">
+        <span className='leave-time'>{leaveTime}</span>
+        <span className='leave-message'>Start your trip</span>
+      </div>
+    );
+  }
+
   render () {
     const { event } = this.props;
     const startDate = moment(event.startDate).format('h:mma');
@@ -33,7 +48,7 @@ class Event extends React.Component {
 
     return (
       <li className="calendar-event">
-        <div className="event-start-trip-message"></div>
+        { this.renderStartTripMessage() }
         { this.renderDirectionsInformation() }
         <div className={ eventClass }
           onClick={ this.handleEditEvent }>
