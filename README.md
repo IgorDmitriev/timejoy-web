@@ -9,6 +9,10 @@ _Integrates your calendar and map apps so you know exactly when and where you ne
 
 TimeJoy analyzes user events for selected day, detect events with the valid address and build a route for a day. It calculates travel time based on user default travel mode, display directions on the map. Users also could save favorite places by different categories and add them to the route and TimeJoy will adjust your directions accordingly.
 
+Technology Stack:
+- Ruby on Rails as a API backend
+- React.js with Redux and Router for front-end as single-page web-app
+
 ![favorites](docs/screenshots/timejoy.png)
 
 
