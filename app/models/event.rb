@@ -67,7 +67,8 @@ class Event < ApplicationRecord
   def handle_update
     # debugger
     calculate_directions
-    next_event.calculate_directions if next_event
+    new_next_event = get_next_event
+    new_next_event.calculate_directions if new_next_event
   end
 
   def calculate_directions
@@ -116,13 +117,16 @@ class Event < ApplicationRecord
   end
 
   def next_event
-    @next_event ||=
-      Event
-        .where(user_id: user.id,
-               start_date: (start_date + 1)..(start_date.end_of_day))
-        .where.not(formatted_address: nil)
-        .sort_by(&:start_date)
-        .first
+    @next_event ||= get_next_event
+  end
+
+  def get_next_event
+    Event
+      .where(user_id: user.id,
+             start_date: (start_date + 1)..(start_date.end_of_day))
+      .where.not(formatted_address: nil)
+      .sort_by(&:start_date)
+      .first
   end
 
   def current_day
