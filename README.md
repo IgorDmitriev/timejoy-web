@@ -32,7 +32,7 @@ To archive this I use `Geocoder gem` and modified by me `Google-service-api gem`
 
 The challenges were:
   - How to properly detect `begginig_of_the_day` and `end_of_the_day` based on User Timezone, to detect what event is first on the day and which is last.
-  - How wo properly reflect to changes if event was created, deleted, address or time was changed.
+  - How who properly reflect to changes if event was created, deleted, address or time was changed.
   - Do as minimum API request as possible, because free daily limit is low.
 
 To archive this I created `Directions` model with relationship: `Event has one Directions`.
@@ -76,8 +76,8 @@ To implement Google Map integration I decided to do it from scratch, because non
   - Display Custom Designed Markers with reach html
   - Display directions from encoded polyline
 
-I wrap Google Maps Map object inside Map Component and Map Container.
-Inside this components I Have EventMarker, FavoritePlaceMarker and Directions react components. Manipulating by component lifecycle methods I create/update/delete my custom markers or polylines. It uses the power of React Virtual Dom and help us to easily map any integration inside React to external api.
+I wrapped Google Maps Map object inside Map Component and Map Container.
+Inside these components I Have EventMarker, FavoritePlaceMarker and Directions react components. Manipulating by component lifecycle methods I create/update/delete my custom markers or polylines. It uses the power of React Virtual Dom and help us to easily map any integration inside React to external api.
 ```
 <EventMarker
   key={ idx }
@@ -96,7 +96,7 @@ Custom Markers based on `google.maps.OverlayView`.
 
 User car create, update and delete favorites places.
 He also can easily add Favorite Place to route and directions will be recalculated.
-User can orginize places by categories, preview them on map and address field uses all power of Google Places Autocomplete.
+User can organize places by categories, preview them on map and address field uses all power of Google Places Autocomplete.
 
 ## Future Directions for the Project
 
